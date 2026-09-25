@@ -338,8 +338,3 @@ modify, distribute or publish it without written permission. `manifest.json` nam
 in its `license` field.
 *Held by:* `every_document_is_present`, which requires `LICENSE.txt` to be in the package you were
 handed, beside this document.
-
-## What it does not do
-
-It does not make your conversation private. See `PRIVACY.md` — that is the part
-most likely to be misread, and it is not a detail.
