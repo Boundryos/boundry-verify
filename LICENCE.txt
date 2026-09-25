@@ -1,0 +1,21 @@
+Boundry Verify — Licence
+Copyright (c) 2026 Boundry. All rights reserved.
+
+You may install and use this software, unmodified, for any lawful purpose,
+including evaluating it and verifying records with it.
+
+You may not copy (except as needed to install and use it), modify, adapt,
+translate, distribute, sublicense, sell or publish this software or any part of it,
+or create derivative works from it, without written permission from Boundry.
+
+No licence is granted, expressly or by implication, under any patent or patent
+application, or under any trade mark. All rights not expressly granted are reserved.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE AND NON-INFRINGEMENT. TO THE EXTENT PERMITTED BY LAW, IN NO EVENT
+SHALL BOUNDRY BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF
+OR IN CONNECTION WITH THE SOFTWARE OR ITS USE. Nothing in this licence excludes rights
+that cannot be excluded under applicable law, including the Australian Consumer Law.
+
+Contact: verify@boundry.tech
