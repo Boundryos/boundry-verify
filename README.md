@@ -1,3 +1,5 @@
+> **This repository holds the release, not the source tree.** Download `boundry-verify-0.3.0-stage1.mcpb` from [Releases](https://github.com/Boundryos/boundry-verify/releases) and open it with Claude Desktop. The `.mcpb` is a zip file: the files and the check command described below are inside it. Documentation: https://verify.boundry.tech/ · Privacy: https://verify.boundry.tech/privacy/ · Contact: verify@boundry.tech
+
 # Boundry Verify — a local, read-only connector over sealed records
 
 ## ⚠ Do not take any of this on trust — run the checks
