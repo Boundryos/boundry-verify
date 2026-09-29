@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "boundry-verify": {
+      "command": "python3",
+      "args": [
+        "-I",
+        "-B",
+        "${CLAUDE_PLUGIN_ROOT}/server/boundry_connector/server.py"
+      ]
+    }
+  }
+}
