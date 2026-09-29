@@ -1,0 +1,30 @@
+{
+ "crossings_to_the_model_provider": 0,
+ "governed_phases": [
+  "admission",
+  "verification",
+  "refusal",
+  "replay",
+  "lineage construction",
+  "envelope sealing",
+  "corpus-root refusal",
+  "transparency-log witness generation"
+ ],
+ "instrument_sha256": {
+  "REGISTERS/conduct_line.py": "e0a084dad18c0ab9d936b7e5b443d1b6914d2883e892960ebea5bc3f8873b756",
+  "VERIFIER/testing/import_statements.py": "6412417518958e9ed4e31f4655bd6c43fe0bc8d534839849c0b7dd6552824ace"
+ },
+ "model_provider_loaded_by_the_kit_runs": {
+  "calculation": false,
+  "refused": false,
+  "transformation": false
+ },
+ "modules_walked": 57,
+ "result_kind": "boundry-conduct-line-result/1",
+ "runtime_lock_permitted_call_modes": [
+  "stub"
+ ],
+ "the_line": "No model is ever called during admission, verification, refusal, replay, lineage construction, envelope sealing, corpus-root refusal, or transparency-log witness generation. A model may only be invoked inside the workload, never inside governed physics.",
+ "verdict": "NO GOVERNED PHASE CAN REACH THE PROVIDER",
+ "what_is_withheld": "the instruments' source and the module paths walked (patent-seat review pending)"
+}

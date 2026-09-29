@@ -1,0 +1,120 @@
+{
+ "bodies": {
+  "a36b1f2c3f84522dd1005145646617d7054c0851e97c72a039c0bdfac9fa07f3": "5b312c20322c20335d"
+ },
+ "envelopes": [
+  {
+   "compiler_version": "1.0",
+   "envelope_era": "era-1",
+   "envelope_form_hash": "43e5462917cc3b8822c02ef3a2194fe3614cc8c891dad59d4e4bc6f5725da28a",
+   "envelope_id": "aa5be1e3-fe01-5a1d-92d1-9dd32a47a9b3",
+   "envelope_kind": "compiler.intent_received",
+   "micro_contract_id": null,
+   "payload_canonical_bytes": "7b22636f6d70696c65725f76657273696f6e223a22312e30222c22696e74656e745f636f6e74656e745f68617368223a2265656135346236373564643964393435383062333861363666396533656236373566353534366538373239316532393466653431656366313839333964313162222c22726571756573745f636f6e74656e745f68617368223a2232343533303135623766303336396363303730316533646135346334353232303232316132383439643331316566316539626264356138313532633763646264222c22726571756573745f6964223a2230303030303030302d303030302d353030302d383030302d303030303030383765323033222c227375626d6974746572223a7b227072696e636970616c5f6964223a226b69742d6576616c7561746f72222c227072696e636970616c5f6b696e64223a2273657276696365227d2c227375627374726174655f76657273696f6e223a22312e30227d",
+   "pipeline_id": "compiler",
+   "position": 0,
+   "prior_envelope": null,
+   "request_id": "00000000-0000-5000-8000-00000087e203",
+   "seal_era": null,
+   "seal_signature": null,
+   "signature_bytes": "25796e6d000f376e2bdf106abb9f824b57e69a29a4256f1eb3b6cc1f2919063ae700d6bd9463932385aa9e5dfdb23a87d92977593a3aa92b50aa0b97a288e50b",
+   "submitter_domain_ref": null,
+   "submitter_principal_id": "kit-evaluator",
+   "substrate_version": "1.0",
+   "transition_timestamp_us": 1790269474070173
+  },
+  {
+   "compiler_version": "1.0",
+   "envelope_era": "era-1",
+   "envelope_form_hash": "d646a1433ae527bbb335fb26ae85fb5e4cb94189dfc89ef11c88f07db9a203de",
+   "envelope_id": "90232f59-d172-5ebc-a122-b5361fdfe2c0",
+   "envelope_kind": "compiler.parse_succeeded",
+   "micro_contract_id": null,
+   "payload_canonical_bytes": "7b22696e74656e745f636f6e74656e745f68617368223a2265656135346236373564643964393435383062333861363666396533656236373566353534366538373239316532393466653431656366313839333964313162222c22696e74656e745f6964223a2262326533663164352d653936632d353337382d623131622d623831623561663634303036222c22726571756573745f6964223a2230303030303030302d303030302d353030302d383030302d303030303030383765323033227d",
+   "pipeline_id": "compiler",
+   "position": 1,
+   "prior_envelope": "aa5be1e3-fe01-5a1d-92d1-9dd32a47a9b3",
+   "request_id": "00000000-0000-5000-8000-00000087e203",
+   "seal_era": null,
+   "seal_signature": null,
+   "signature_bytes": "19af5ddd6593cff67f8fed02c2acb2b6c9129c19d1584eba2301a7cfff4ed0fe12930b1c7f53a0d0fa2893c5315cf130f651c963d6a26668e6a334a4159e360f",
+   "submitter_domain_ref": null,
+   "submitter_principal_id": "kit-evaluator",
+   "substrate_version": "1.0",
+   "transition_timestamp_us": 1790269474072043
+  },
+  {
+   "compiler_version": "1.0",
+   "envelope_era": "era-1",
+   "envelope_form_hash": "765c533fa4747ab5b4417c2c71002a187005e6bdf909b0ef25cf9163a50c3400",
+   "envelope_id": "cf3f7e48-c091-55e1-96c8-7f39a34c437c",
+   "envelope_kind": "compiler.resolve_failed",
+   "micro_contract_id": null,
+   "payload_canonical_bytes": "7b2264657461696c223a227072696d6974697665202761726974686d657469632e6e6f745f615f6465636c617265645f7072696d697469766527206973206e6f74206f6e2074686520436f6d70696c65722773207072696d697469766520616c6c6f776c697374222c226572726f725f636f6465223a22434f4d502d4552522d333035222c226572726f725f6e616d65223a227072696d69746976655f6e6f745f696e5f616c6c6f776c697374222c22696e74656e745f6964223a2262326533663164352d653936632d353337382d623131622d623831623561663634303036222c227265636f76657261626c65223a66616c73652c22726571756573745f6964223a2230303030303030302d303030302d353030302d383030302d303030303030383765323033222c227374616765223a227265736f6c7665222c227375626a656374223a7b227072696d69746976655f6964223a2261726974686d657469632e6e6f745f615f6465636c617265645f7072696d6974697665227d7d",
+   "pipeline_id": "compiler",
+   "position": 2,
+   "prior_envelope": "90232f59-d172-5ebc-a122-b5361fdfe2c0",
+   "request_id": "00000000-0000-5000-8000-00000087e203",
+   "seal_era": null,
+   "seal_signature": null,
+   "signature_bytes": "d17ae24822cbd99807ecb50db20897fd09ddb0325809e596df2165c573a49d0d72d75de6fbb80d74ee5c961515f1e1ca4830995b2d0f546321913d71fcfa1205",
+   "submitter_domain_ref": null,
+   "submitter_principal_id": "kit-evaluator",
+   "substrate_version": "1.0",
+   "transition_timestamp_us": 1790269474073418
+  },
+  {
+   "compiler_version": "1.0",
+   "envelope_era": "era-1",
+   "envelope_form_hash": "e17bb566ae4ff210a2699984a6a34665dd5ab69db4ec09432f9532380879ed83",
+   "envelope_id": "c1e958c2-9a45-5792-84fb-0a030b2ce9e5",
+   "envelope_kind": "compiler.request_closed",
+   "micro_contract_id": null,
+   "payload_canonical_bytes": "7b2261756469745f636861696e5f616e63686f72223a2263663366376534382d633039312d353565312d393663382d376633396133346334333763222c22636861696e5f6c656e677468223a332c226f7574636f6d65223a2272656a6563746564222c226f75747075745f636f756e74223a302c22706c616e5f636f756e74223a302c227265636f76657261626c65223a66616c73652c22726571756573745f6964223a2230303030303030302d303030302d353030302d383030302d303030303030383765323033227d",
+   "pipeline_id": "compiler",
+   "position": 3,
+   "prior_envelope": "cf3f7e48-c091-55e1-96c8-7f39a34c437c",
+   "request_id": "00000000-0000-5000-8000-00000087e203",
+   "seal_era": null,
+   "seal_signature": null,
+   "signature_bytes": "5f3ad3566f99c914e97eb2b541cc52d4592efc68b4e293b9c769073ab1b10057221489f4a8f2246845ef4cfdaa2a2b6eb08f49a1c24df0629a4d82e3cbd50f07",
+   "submitter_domain_ref": null,
+   "submitter_principal_id": "kit-evaluator",
+   "substrate_version": "1.0",
+   "transition_timestamp_us": 1790269474076012
+  }
+ ],
+ "environment": {
+  "implementation": "CPython",
+  "machine": "aarch64",
+  "packages": {
+   "aiosqlite": "0.22.1",
+   "cryptography": "48.0.0",
+   "psutil": "7.2.2",
+   "pydantic": "2.13.4",
+   "pydantic_core": "2.46.4"
+  },
+  "python": "3.13.15",
+  "system": "Linux"
+ },
+ "export_format": "boundry-kernel-export/1",
+ "generator_sha256": "e39a104074b3c579327f1d14ae644e58621bdb8f964cd1fed904e431e02497ea",
+ "model_provider_loaded_by_this_run": false,
+ "platform_tag": "linux-aarch64",
+ "request_id": "00000000-0000-5000-8000-00000087e203",
+ "run_id": "refused-linux-aarch64",
+ "signing_key_id": "kit-synthetic-era-1",
+ "submitted_intent": {
+  "intent_content_hash": "eea54b675dd9d94580b38a66f9e3eb675f5546e87291e294fe41ecf18939d11b",
+  "intent_kind": "CALCULATION",
+  "intent_payload": {
+   "input_binding_names": [
+    "primary"
+   ],
+   "operation_ref": "primitive:arithmetic.not_a_declared_primitive",
+   "output_binding_name": "result"
+  },
+  "intent_version": 1
+ },
+ "workload": "refused"
+}

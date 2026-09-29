@@ -1,0 +1,15 @@
+{
+  "body": {
+    "amount": "60.00",
+    "note": "synthetic",
+    "schema_id": "demo.invoice.v1",
+    "subject_ref": "subject-a"
+  },
+  "content_hash": "0f380735330aef20e1bbbec8e31b8aa4642e7900e8beaca75050d4cd6fd9b408",
+  "envelope_kind": "compiler.plan_sealed",
+  "position": 2,
+  "record_id": "rec-a-0003-badsig",
+  "signature": "7a68591072128a130c2e40b66ee891ac9938936279e119f078c99b054acc1cd3700169d9b3bb11a8d4f64fe92bedc1b40c85cb6aff0cc830e41706f8905c3303",
+  "signing_key_id": "connector-demo-era-1",
+  "submitter_domain_ref": "toy-tenant-a"
+}

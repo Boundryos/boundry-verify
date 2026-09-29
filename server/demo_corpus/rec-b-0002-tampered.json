@@ -1,0 +1,15 @@
+{
+  "body": {
+    "amount": "999.99",
+    "note": "synthetic",
+    "schema_id": "demo.invoice.v1",
+    "subject_ref": "subject-b"
+  },
+  "content_hash": "36e3dbc9c555692337723d413b1fa7bade1cc3e443faef9ee9ffe91c9245a9a2",
+  "envelope_kind": "compiler.plan_sealed",
+  "position": 1,
+  "record_id": "rec-b-0002-tampered",
+  "signature": "cfab13e252b9b010da43bb0214772a00c886e412f22f22c993fd8d2073ade529e400c3943593f47a8036e0ccd9e35f26ce5a9e2d862f222cf486b9dda92d880c",
+  "signing_key_id": "connector-demo-era-1",
+  "submitter_domain_ref": "toy-tenant-b"
+}

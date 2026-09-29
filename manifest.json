@@ -1,0 +1,79 @@
+{
+  "manifest_version": "0.3",
+  "name": "boundry-verify",
+  "display_name": "Boundry Verify",
+  "version": "0.3.1-stage1",
+  "description": "A local, read-only MCP server over sealed Boundry records. Contacts nothing; reads folders you declare. Requires Python 3.12 or newer.",
+  "long_description": "Requires Python 3.12 or newer. A stock macOS `python3` is older than that, and this package refuses before doing any work rather than running with parts of itself missing.\n\nWhat it claims, in one sentence: one key signs everything and you hold it; the determinism shown is for the governed road, on the workloads in the kit, across the platforms named.\n\nNothing leaves your machine through this connector: it opens no socket and contacts no endpoint. Everything it renders is read by a model, as ordinary conversation content — see `PRIVACY.md`, which ships beside this file.",
+  "author": {
+    "name": "Boundry",
+    "email": "verify@boundry.tech"
+  },
+  "homepage": "https://verify.boundry.tech/",
+  "documentation": "https://verify.boundry.tech/",
+  "support": "https://verify.boundry.tech/",
+  "privacy_policies": [
+    "https://verify.boundry.tech/privacy/"
+  ],
+  "license": "LicenseRef-Boundry-Proprietary",
+  "icon": "icon.png",
+  "server": {
+    "type": "python",
+    "entry_point": "server/boundry_connector/server.py",
+    "mcp_config": {
+      "command": "python3",
+      "args": [
+        "-I",
+        "-B",
+        "${__dirname}/server/boundry_connector/server.py"
+      ],
+      "env": {
+        "BOUNDRY_CONNECTOR_ROOTS": "${user_config.roots}"
+      }
+    }
+  },
+  "compatibility": {
+    "runtimes": {
+      "python": ">=3.12"
+    }
+  },
+  "user_config": {
+    "roots": {
+      "type": "string",
+      "title": "Folders the connector may read",
+      "description": "Leave EMPTY to read only the packaged synthetic evaluation kit (`kit`) and demonstration records (`demo`), and nothing else. Otherwise a path-separator-delimited list, each entry a bare path or `label=path`; a folder you declare REPLACES the packaged ones. Name the folders you mean; do not give it a whole home directory.",
+      "required": false,
+      "default": ""
+    }
+  },
+  "tools": [
+    {
+      "name": "verify_record",
+      "description": "Check one sealed record with Boundry's INDEPENDENT verifier and report one of four outcomes: ATTESTED, REFUTED, ALTERED, UNATTESTED. UNATTESTED states a gap in the reader and is never a finding against the record. tenant_scope is REQUIRED — omitting it refuses rather than verifying any record in the directory. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "get_envelope",
+      "description": "Read one envelope. tenant_scope is REQUIRED — omitting it refuses rather than returning everything. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "query_envelopes",
+      "description": "List envelopes within a declared scope. tenant_scope is REQUIRED — absence of identity is not omniscience. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "chain_status",
+      "description": "Report what this reader can see of an artefact directory, each figure naming the instrument that produced it, and each figure it could NOT take named as not taken. tenant_scope is REQUIRED. Under per_tenant every figure is a figure of the declared scope and the cross-tenant figures are absent, not emptied. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "explain_record",
+      "description": "Render one record's provenance from the artefacts read during the call. Nothing is recalled from memory. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "check_plan_identity",
+      "description": "Recompute a sealed plan's id from its six inputs and check its seal, from a kernel export in a declared root. The id identifies the six inputs; the plan body is identified by the seal's content_hash. tenant_scope is REQUIRED. A tool answers only inside the declared scope."
+    },
+    {
+      "name": "compare_runs",
+      "description": "Check two kernel exports against their own records, then compare them field by field and name each difference: EQUIVALENT, DIVERGENT or UNREACHABLE. This is hash comparison, not re-execution. tenant_scope is REQUIRED. A tool answers only inside the declared scope."
+    }
+  ]
+}

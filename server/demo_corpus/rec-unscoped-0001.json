@@ -1,0 +1,15 @@
+{
+  "body": {
+    "amount": "1.00",
+    "note": "synthetic; carries NO tenant",
+    "schema_id": "demo.invoice.v1",
+    "subject_ref": "subject-x"
+  },
+  "content_hash": "cfac8d28fb1fee3e4da8f4f854860fc03963a4f4dc4970a5b020d7762964e6b9",
+  "envelope_kind": "compiler.plan_sealed",
+  "position": 0,
+  "record_id": "rec-unscoped-0001",
+  "signature": null,
+  "signing_key_id": null,
+  "submitter_domain_ref": null
+}

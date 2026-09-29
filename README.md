@@ -1,14 +1,53 @@
 Why it exists: Boundry takes execution out of the model's hands. The Boundry Substrate decides whether a request may run, executes it deterministically, and signs a record of both; this connector checks those records on your machine. Overview: https://verify.boundry.tech/
 
-> **This repository holds the release, not the source tree.** Download `boundry-verify-0.3.0-stage1.mcpb` from [Releases](https://github.com/Boundryos/boundry-verify/releases) and open it with Claude Desktop. The `.mcpb` is a zip file: the files and the check command described below are inside it. Documentation: https://verify.boundry.tech/ · Privacy: https://verify.boundry.tech/privacy/ · Contact: verify@boundry.tech
+> **This repository is the Boundry Verify plugin (Cowork and Claude Code) and holds its source.** For Claude Desktop's ordinary chat, or to read your own folders, download `boundry-verify-0.3.1.mcpb` from [Releases](https://github.com/Boundryos/boundry-verify/releases) and open it with Claude Desktop; the `.mcpb` holds the same server. Documentation: https://verify.boundry.tech/ · Privacy: https://verify.boundry.tech/privacy/ · Contact: verify@boundry.tech
 
 # Boundry Verify — a local, read-only connector over sealed records
+
+## Try it in Claude Desktop
+
+1. **Have Python 3.12 or newer** (see below: the Python that ships with macOS is older, and the
+   package refuses under it).
+2. **Download `boundry-verify-0.3.1.mcpb`** from Releases and double-click it. Claude Desktop
+   opens the install screen.
+3. **Leave "Folders the connector may read" EMPTY.** Empty means the two packaged synthetic
+   folders, `kit` (the evaluation kit) and `demo` (the demonstration records), and nothing else.
+   A folder you enter there REPLACES the two packaged ones, so to try the kit, leave it empty.
+4. **Start a new chat and ask these three things.** The answers come back in the chat; the
+   connector writes no files. Each prompt names the scope because every envelope tool requires
+   one and refuses without it. Claude words its answer its own way each time; the connector's
+   reply underneath does not change, and `EXAMPLES.md` in the GitHub repository holds that
+   reply for each prompt exactly as the connector returns it, to compare with the tool
+   result Claude Desktop shows.
+
+| ask Claude | you should see |
+|---|---|
+| "Use Boundry Verify to compare runs calculation-m2 and calculation-linux-aarch64 in the kit, global scope." | **EQUIVALENT** for both runs. The answer names each field that differs between them and marks every one as expected, with the reason: `transition_timestamp_us` (wall clock), `envelope_form_hash` (taken over that stamp), `environment` (the interpreter, operating system, machine and packages of each run), `platform_tag` (which platform ran it) and `run_id` (the run's own label). Nothing else differs. |
+| "Compare calculation-m2 with calculation-m2--forged-hash in the kit, global scope." | **calculation-m2 EQUIVALENT** to its own record, and **calculation-m2--forged-hash DIVERGENT**: checked against its own record, the forged copy fails its signature at envelope 9 (`envelope-signature-fails`). The copy's output was changed and its recorded hash rewritten to match, but it was not re-signed. Compared field by field with the original it differs in `payload_canonical_bytes` and `bodies`, and carries two fields the original does not, `tampering` and `tampered_from`, in which the kit's tampered copy states what was done to it; the connector marks all four as findings. This is hash comparison, not re-execution. |
+| "Explain record transformation-m2 in the kit, global scope." | The export's lineage, link by link, each link holding: the record's order (its signatures and form-hash chain), the submitted intent, the plan carrying that intent, the input hashes, the sealed plan (its body, seal and id), the execution naming the sealed plan, the output hashes, and the closure counts. |
+
+If `kit` or `demo` is refused with `corpus-root-not-declared` while the field is empty, the
+extension installed is 0.3.0, which read an empty field as a declared folder. Remove it and
+install 0.3.1.
+*Held by:* `an_UNFILLED_host_placeholder_means_the_packaged_roots`,
+`whitespace_only_roots_mean_the_packaged_roots`,
+`a_placeholder_beside_a_real_root_is_ignored_and_the_real_root_REPLACES_the_packaged_ones` and
+`the_manifest_roots_field_defaults_to_EMPTY`.
+
+## As a plugin (Cowork and Claude Code)
+
+This repository is also a plugin, and the plugin runs the same server with the same command.
+It reads only the two packaged folders, `kit` and `demo`: the plugin declares no folders of its
+own and has no setting to add one. It works in Cowork on your computer and in Claude Code, not in
+ordinary chat. For ordinary chat, or to read your own folders, install the `.mcpb` from Releases.
+The plugin runs `python3` on your machine, which must be Python 3.12 or newer; it contacts nothing
+and writes nothing. The three prompts above, and their answers, are the same.
 
 ## ⚠ Do not take any of this on trust — run the checks
 
     python3 -I -B -m unittest discover -s server/boundry_connector -t server
 
-**74 checks, in this package, with nothing installed.** They use only the
+**78 checks, in this package, with nothing installed.** They use only the
 standard library: no test framework to fetch, no network, no configuration.
 Every *Held by* line below names a check in that run.
 
@@ -36,17 +75,17 @@ current one from python.org or your package manager.
 | interpreter | third-party packages | result |
 |---|---|---|
 | macOS system Python 3.9.6 | none | **REFUSED before any work**, exit 2 |
-| Python 3.12.12 | none | **74 run, 0 failures, 0 skipped** |
-| Python 3.13.7 | none | **74 run, 0 failures, 0 skipped** |
-| Python 3.13.7 | `pydantic` | **74 run, 0 failures, 0 skipped** |
+| Python 3.12.13 | none | **78 run, 0 failures, 0 skipped** |
+| Python 3.13.7 | none | **78 run, 0 failures, 0 skipped** |
+| Python 3.13.7 | `pydantic` | **78 run, 0 failures, 0 skipped** |
 
 ⚠ **BELOW THE FLOOR THERE IS NO RUN TO SKIP ANYTHING IN.** 3.9.6 does not skip;
 it refuses. Below the floor 32 of this package's 44 modules cannot be imported,
 and a suite reporting `OK` with quiet skips would tell you the opposite of what
 happened.
 
-21 of the 74 checks read the shipped source rather than importing it, and
-need nothing installed; the other 53 import the package or drive the running
+22 of the 78 checks read the shipped source rather than importing it, and
+need nothing installed; the other 56 import the package or drive the running
 server. **The verifier is pure standard library.**
 
 Ten consecutive runs on each interpreter gave the same last line every time.
@@ -198,10 +237,18 @@ reason that applies, not the first fault encountered.
 
 Unset `BOUNDRY_CONNECTOR_ROOTS` means the two packaged synthetic roots — the
 demonstration corpus and the evaluation kit's evidence — **and nothing else**. The
-safe default is the narrow one.
+safe default is the narrow one. **Empty means the same as unset:** so does a value of
+only spaces, and so does a host placeholder the host left unfilled (an entry that is
+wholly `${…}`), which is what Claude Desktop passes when "Folders the connector may
+read" is left empty. A real declared root still REPLACES the packaged ones, and a
+placeholder beside it is ignored.
 *Held by:* `corpus.allowed_roots` in this package — read it and see that unset
-means those two roots and nothing else — and the check
-`UNSET_roots_mean_the_two_packaged_roots_and_nothing_else`.
+means those two roots and nothing else — and the checks
+`UNSET_roots_mean_the_two_packaged_roots_and_nothing_else`,
+`an_UNFILLED_host_placeholder_means_the_packaged_roots`,
+`whitespace_only_roots_mean_the_packaged_roots`,
+`a_placeholder_beside_a_real_root_is_ignored_and_the_real_root_REPLACES_the_packaged_ones`
+and `the_manifest_roots_field_defaults_to_EMPTY`.
 
 ### A root holds records, kernel exports, and three files named one by one
 
@@ -272,7 +319,7 @@ from the source so a refusal added later cannot escape it; with the control
 ### One name, one version
 
 On `initialize` the server announces **`boundry-verify`**, titled **Boundry Verify**,
-version **`0.3.0-stage1`** — the same name, display name and version `manifest.json`
+version **`0.3.1-stage1`** — the same name, display name and version `manifest.json`
 carries. All three come from one declaration in `boundry_connector/__init__.py`, and
 the version is built from the package's stage, so the handshake cannot claim a stage
 it is not running. **`stage1` means this stage reads and verifies**: there is no write
@@ -345,4 +392,3 @@ handed, beside this document.
 
 It does not make your conversation private. See `PRIVACY.md` — that is the part
 most likely to be misread, and it is not a detail.
-
