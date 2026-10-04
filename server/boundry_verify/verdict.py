@@ -57,7 +57,7 @@ class Outcome:
     #: **Never means who altered it, or when.**
     ALTERED = "ALTERED"
 
-    #: ⚠ ERR-P4-002 (DRAFT, — THE VERIFIER FAILED TO COMPLETE.
+    #: ⚠ ERR-P4-002 (DRAFT) — THE VERIFIER FAILED TO COMPLETE.
     #: The other four are claims ABOUT THE RECORD. This one is a claim about
     #: THIS INSTRUMENT, and it establishes NOTHING about the record either way.
     #:
@@ -140,7 +140,7 @@ class Verdict:
                 # fired on "supplied", which contains "lied" — so the guard
                 # refused a correctly-worded REFUTED verdict whose detail read
                 # "a receipt was supplied and is not well-formed".
-                # This is 's lesson arriving in the implementation
+                # This is an earlier lesson arriving in the implementation
                 # rather than the test: a rule about what an output must SAY
                 # cannot be enforced by naive substring matching either.
                 if re.search(r"\b" + re.escape(word) + r"\b", blob):
@@ -252,7 +252,7 @@ def receipt_verdict(*, internally_sound: bool, signature_ok: bool,
     ⚠ Retained for the general case. The ladder in `chain.py` uses a narrower
     form, because `ERR-P3-005` makes `witness_token` opaque and this verifier
     therefore cannot establish the SECOND of the two things — see
-    `receipt.unverifiable_because` and.
+    `receipt.unverifiable_because`.
     """
     never = (
         "that the certificate belongs to a trusted authority",

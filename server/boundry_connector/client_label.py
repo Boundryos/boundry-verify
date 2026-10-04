@@ -17,7 +17,7 @@ Everything this module is exercised with is synthetic.
 ⚠ **THE MAPPING NEVER LIVES HERE.** Spec §7: label-to-client sits on the MyFDC
 client record and nowhere else. This module mints and validates STRINGS. It has
 no client argument, no client field, and no place to put one — which is the
-point, and measures the abstention rather than promising it.
+point, and a vector measures the abstention rather than promising it.
 
 ⚠ **K-3.** Import is definitions only: no I/O, no clock, no network.
 """
@@ -73,8 +73,8 @@ CHECK_ALPHABET = ALPHABET + "*~$=U"
 
 #: ⚠ **THE DECLARED TYPE, AND WHY IT IS A `NewType` AND NOT A SUBCLASS.**
 #:
-#: /. Three times this programme has met one shape — the
-#: boundary list, key material, acceptors at
+#: Three times this programme has met one shape — the
+#: boundary list, key material and acceptors
 #: — and each time **recognition was bounded by whether the thing
 #: happened to be NAMED like itself.** Twice the repair was a DECLARATION. This
 #: is the third.
@@ -97,7 +97,7 @@ PREFIX = "B-"
 #: CARE.*** The operator's mint refuses to draw from here; canon's vectors mint
 #: only from here. Before this, four synthetic labels sat in canon because
 #: someone chose them carefully, and one of them arrived inside the sentence
-#: explaining 's Defect 2.
+#: explaining a defect.
 RESERVED_POSITION = 0
 RESERVED_SYMBOL = "Z"
 
@@ -108,7 +108,7 @@ LEGACY_SYNTHETIC: tuple[str, ...] = (
     "B-K7M-4QT",   # the vectors' standing label
     "B-9RT-2WX",   # the mismatch vector's second label
     "B-XXX-XXX",   # the spec's own form template
-    "B-17M-4QT",   # arrived inside 's explanation of Defect 2
+    "B-17M-4QT",   # arrived inside the explanation of a defect
 )
 
 #: ⚠ **SPEC §4 IS LOAD-BEARING AND THIS IS WHY IT IS A CONSTANT.** `B` is itself
@@ -141,7 +141,7 @@ def check_symbol(code: str) -> str:
 
 
 #: ⚠ **THE CHECK SYMBOL'S DECLARED BLIND SET** — every detector
-#: states what it cannot see. Filled in from the exhaustive measurement at
+#: states what it cannot see. Filled in from the exhaustive measurement.
 #: It is held by a vector, not by the algorithm's reputation.
 CHECK_BLIND_SET: tuple[str, ...] = (
     "any error that leaves the code's value unchanged modulo 37 — a single "
@@ -201,7 +201,7 @@ def _mint(*, issued: frozenset[str], with_check: bool, _attempts: int,
           reserved: bool) -> str:
     """Mint one label. **`secrets`, never `random`** (spec §3).
 
-    ⚠ **`issued` IS NOT OPTIONAL IN PRACTICE AND MEASURED WHY.** The
+    ⚠ **`issued` IS NOT OPTIONAL IN PRACTICE, AND WHY WAS MEASURED.** The
     draft specified no uniqueness mechanism at all while §6 promises a label
     holds for life and is never reissued. Over a 32^6 space the birthday bound
     gives **P(collision) ≈ 4.5% at 10,000 labels and 0.69 at 50,000** — not a
@@ -240,7 +240,7 @@ def _mint(*, issued: frozenset[str], with_check: bool, _attempts: int,
 def render(code: str, *, with_check: bool = False) -> str:
     """`B-XXX-XXX`, or `B-XXX-XXX-C` when the deployment uses check symbols.
 
-    ⚠ **THE CHECK SYMBOL GETS ITS OWN GROUP, AND MEASURED WHY.** The
+    ⚠ **THE CHECK SYMBOL GETS ITS OWN GROUP, AND WHY WAS MEASURED.** The
     draft appended it as an optional seventh character, which makes the stripped
     form 7 OR 8 characters — reintroducing exactly the prefix ambiguity §4
     exists to prevent. Its own group keeps the rendered form unambiguous, and
@@ -267,9 +267,9 @@ def validate(label: str, *, with_check: bool = False) -> ClientLabel:
 
     ⚠ **CASE IS CANONICALISED; SYMBOLS ARE NEVER SUBSTITUTED.** Upper and lower
     case are the same Crockford symbol, so folding them changes nothing and is
-    not the coercion forbids. **Crockford's decode ALSO maps `I`/`L`→`1`
+    not the forbidden coercion. **Crockford's decode ALSO maps `I`/`L`→`1`
     and `O`→`0`, and that is a different symbol** — accepting it would silently
-    turn one client's label into another's. measured the substitution
+    turn one client's label into another's. A measurement covered the substitution
     and this function refuses it.
     """
     if not isinstance(label, str) or not label:

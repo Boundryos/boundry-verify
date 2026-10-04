@@ -1,9 +1,9 @@
 """`BV-025` — a signature is carried AS IT WAS MADE, and the form is NAMED.
 
-**. This module did not exist and the clause it implements is why the
- run reached no verdict.** The verifier read `record.cose_sign1` and
-`checkpoint.cose_sign1`, which is **as it stood
-before **. The current text carries `signature` and `signature_form` on
+**This module did not exist, and the clause it implements is why an
+earlier run reached no verdict.** The verifier read `record.cose_sign1` and
+`checkpoint.cose_sign1`, which is the bundle specification **as it stood
+before it was amended**. The current text carries `signature` and `signature_form` on
 both objects, and `cose_sign1` on neither.
 
 ## What the specification says, and it is a correction of a ruling
@@ -23,7 +23,7 @@ construction, ever.*
 
 ## ⚠ The recognised set is PROVISIONED, and that is `BV-004` and not a choice
 
-`BV-004` was **extended ***"the no-default discipline covers EVERY
+`BV-004` was **extended**: *"the no-default discipline covers EVERY
 named profile identifier in a bundle, `record.form_tag` included."*
 `signature_form` is a named profile identifier that arrived after that
 extension was written, and it inherits the rule — a verifier that defaults it
@@ -41,10 +41,10 @@ operator to different fixes:
 | this build performs it, and the operator did not provision it | `signature-form-not-recognised` |
 
 ⚠ **The middle row said "provisioned, and this build performs no such
-construction" until.** *That word was narrower than the code directly
+construction".** *That word was narrower than the code directly
 beneath it: `resolve` checks `CONSTRUCTIONS` membership BEFORE provisioned-set
 membership, so an unimplemented name never reaches the provisioning question and
-the reason fires whether or not the set contains it.* ** across
+the reason fires whether or not the set contains it.* **Measured across
 four provisioned sets including the empty one, and the specification's gloss was
 corrected first; this table is the
 same defect in the file the ordering lives in, aligned.**
@@ -63,7 +63,7 @@ along.*
 describe the COSE profile that era will use. **This specification version names
 no `signature_form` value for it.** `cose.py` implements that profile and is
 reachable the moment a form identifier for it exists; **inventing one now would
-be inventing the specification**, which is the failure stopped for.
+be inventing the specification**, which is the failure an earlier pack stopped for.
 """
 
 from __future__ import annotations

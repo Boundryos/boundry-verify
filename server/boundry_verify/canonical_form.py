@@ -1,7 +1,7 @@
 """The Boundry Canonical Form, version 1 — an independent implementation.
 
-Written (RATIFIED v1.0, 29 Aug 2026) ALONE,
-'s authorship guardrail. The author of this file has not read the
+Written from the canonical-form specification (RATIFIED v1.0, 29 Aug 2026) ALONE,
+under an authorship guardrail. The author of this file has not read the
 Boundry kernel, its tests, its corpora or its golden vectors.
 
 Standard library only. No network. Rule identifiers in comments are the
@@ -36,7 +36,7 @@ TYPE_UNSUPPORTED = "type-unsupported"            # CF-TYPE-001
 DECIMAL_NOT_FINITE = "decimal-not-finite"        # CF-DEC-001
 STRING_NOT_ENCODABLE = "string-not-encodable"    # CF-STR-006
 MAPPING_KEY_NOT_STRING = "mapping-key-not-string"  # CF-MAP-001
-MAPPING_KEY_NOT_UNIQUE = "mapping-key-not-unique"  # CF-MAP-006 (DRAFT, )
+MAPPING_KEY_NOT_UNIQUE = "mapping-key-not-unique"  # CF-MAP-006 (DRAFT)
 DEPTH_EXCEEDED = "depth-exceeded"                # CF-DEPTH-001
 
 
@@ -196,9 +196,9 @@ def canonicalise(
     #     subclass of date, so a date-first test would swallow every timestamp.
     #     ERRATA_P3_01 accepts this. OWNER: Research seat. DATE: the next
     #     revision pack.
-    #     [DISCLOSE-001 backfill: recorded as a STOP, because that
-    #     pack forbade touching this file; discharged here, which
-    #     owns it. Its twin at VERIFIER/AMBIGUITY_LOG.md:149 was discharged at
+    #     [DISCLOSE-001 backfill: recorded as a STOP, because an earlier
+    #     pack forbade touching this file; discharged here, by the pack that
+    #     owns it. Its twin at VERIFIER/AMBIGUITY_LOG.md:149 was discharged
     #     earlier, and this comment was the duplicate left reading as open.])
     if value is None:
         return "null"                             # CF-NULL-001
@@ -265,12 +265,12 @@ def _emit_mapping(value: Mapping, *, profile: str, max_depth: int, _depth: int) 
                 MAPPING_KEY_NOT_STRING, "CF-MAP-001", type(key).__name__
             )
         normalised = _nfc(key)
-        # ── CF-MAP-006 (DRAFT, ─────────────────────────────────
+        # ── CF-MAP-006 (DRAFT) ─────────────────────────────────
         # ⚠ REFUSE THE COLLISION. Two keys equal after NFC are THE SAME KEY
         # under the identity model CF-MAP-002 declares -- and emitting both
         # says "these are the same key" and then writes both of them.
         #
-        # Until this emitted a duplicate key, which OUR OWN STRICT DECODER
+        # Earlier this emitted a duplicate key, which OUR OWN STRICT DECODER
         # REFUSES BY NAME (cbor.py: cbor-duplicate-map-key). The canonicaliser
         # emitted bytes the verifier had to reject: ERR-P4-001 INCOHERENT,
         # reachable from caller-supplied content.

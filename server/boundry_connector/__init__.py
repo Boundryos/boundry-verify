@@ -3,7 +3,7 @@
 Serves ONE
 account: the operator's own, through Claude Desktop, over stdio.
 
-⚠: this line opened "The PRIVATE Boundry connector". *Private* was a
+⚠ This line opened "The PRIVATE Boundry connector". *Private* was a
 programme word for a stage, and the package is now handed to reviewers who read it as a claim
 about their data. The shape it describes has not changed — single-operator, non-production — and
 `ladder.RUNTIME_WORDING` says exactly that on every answer.
@@ -11,11 +11,11 @@ about their data. The shape it describes has not changed — single-operator, no
 ⚠ **THIS PACKAGE IS ENGINE-ADJACENT, NOT ENGINE.** It lives outside
 `ENGINE_ROOTS` (`compiler`, `substrate`, `manifest`), so the engine digest does
 not move when it changes. *`compiler/api/` is 16 of the engine's 141 files;
-building the connector there — which calls "the natural substrate" —
+building the connector there — which the specification calls "the natural substrate" —
 would have moved the neutrality digest and put a doorway inside the claim it
 is supposed to be neutral about.*
 
-⚠ **NOTHING HERE SIGNS.** 's rule for the independent verifier applies to
+⚠ **NOTHING HERE SIGNS.** The rule for the independent verifier applies to
 a connector for the same reason: a reader that can sign can manufacture the
 evidence it reads. `test_connector_cx001.py` asserts the absence from outside
 the module.
@@ -64,7 +64,7 @@ STAGE = 1
 #: ⚠ **THE PUBLIC NAME**: the name, the display name and the
 #: version are declared HERE and nowhere else. History: this package announced
 #: `boundry-private-connector` / `0.1.0-stage1` until the rename landing.
-#: The version is `0.3.0-stage1` ('s call, stated): the MINOR moves because
+#: The version is `0.3.0-stage1`: the MINOR moves because
 #: what a reader RECEIVES changed — `manifest.json` lost eleven annotation keys to pass the official
 #: validator and gained `long_description` and `support`, the four release values are filled, and the
 #: three shipped documents were rewritten for a reader outside the programme. No tool was added or
@@ -77,12 +77,12 @@ STAGE = 1
 #: (`GEN2_RULINGS` G2.12).
 CONNECTOR_NAME = "boundry-verify"
 CONNECTOR_DISPLAY_NAME = "Boundry Verify"
-CONNECTOR_VERSION = f"0.3.1-stage{STAGE}"
+CONNECTOR_VERSION = f"0.3.2-stage{STAGE}"
 
 #: The registered tool surface, closed — **SEVEN tools**: the five of Stage 1, and the evaluation
 #: kit's two ("at most two new tools, both read-only").
 #:
-#: ⚠ **THE WALL, NOT THE LOCK —, deciding 's filed
+#: ⚠ **THE WALL, NOT THE LOCK — the ruling on a filed
 #: disagreement.** `submit_intent` was here, built as ordered and
 #: recommended against: *a tool in a tool list is one a model reaches for, and a
 #: refusal one flag from a write teaches the model the server is write-capable.*

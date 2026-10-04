@@ -31,7 +31,7 @@ as an honest absence.***
    §2.4.1. ***Presence, and nothing more:*** this checker builds no chain, so
    the attribute's contents are compared to nothing.
 
-## ⚠ — `BV-029`, AND WHERE IT CAME FROM
+## ⚠ `BV-029`, AND WHERE IT CAME FROM
 
 **Until this pack the checker did not require the ESS attribute and attested a
 token with none.** *No fixture could have shown that — every artefact on both
@@ -52,7 +52,7 @@ of the only kind it took.**
 
 **2 · The anchor's `key_material` is REDUCED under the format it declares**
 (`key_forms`), rather than accepted only in one encoding. `BV-011` as corrected
- compares KEYS and not ENCODINGS, **and the same reduction has to
+compares KEYS and not ENCODINGS, **and the same reduction has to
 happen here or an anchor and a bundle carrying one key in two representations
 would agree at the comparison and disagree at the check.**
 
@@ -60,7 +60,7 @@ would agree at the comparison and disagree at the check.**
 > moved the disagreement rather than removed it.***
 
 **`genTime` is REPORTED, NEVER JUDGED**, and it travels as a FINDING — which by
- cannot alter a verdict. *A verifier does not know what time it is in any
+rule cannot alter a verdict. *A verifier does not know what time it is in any
 sense a record can rely on, and a checker that rejected a token for being too
 old would have substituted its own clock for evidence.*
 
@@ -101,7 +101,7 @@ ANCHOR_FORMAT = "ed25519-raw"
 ANCHOR_FORMATS = key_forms.REDUCIBLE_FORMATS
 
 #: Every named cause this checker can report. **Each is shown reachable in
-#: `selftest_p303_b.py`** -- made the reachability sweep the standard for
+#: `selftest_p303_b.py`** -- a ruling made the reachability sweep the standard for
 #: a refusal vocabulary, and a cause no input reaches is a comment.
 #: ⚠ Which key kind each admitted signature algorithm requires. Keyed by NAME,
 #: so `vocabulary_sweep` discovers no new subject.
@@ -111,7 +111,7 @@ _KIND_FOR_ALGORITHM = {
     rfc3161.ID_RSA_SHA384: key_forms.KIND_RSA,
     rfc3161.ID_RSA_SHA512: key_forms.KIND_RSA,
     rfc3161.ID_ECDSA_SHA256: key_forms.KIND_EC,
-    # ⚠ landing B. The kind is RSA, so the anchor-kind
+    # ⚠ Landing B. The kind is RSA, so the anchor-kind
     # matrix rules it exactly as the three `sha*WithRSAEncryption` rows are
     # ruled. Only the HASH is resolved differently -- see `_rsa_hash_name`.
     rfc3161.ID_RSA_ENCRYPTION: key_forms.KIND_RSA,
@@ -219,7 +219,7 @@ _SHORT = witness.TOKEN_REFUSED_CHECKER_SHORT
 _DEFECT = witness.TOKEN_REFUSED_TOKEN_DEFECT
 
 # ---------------------------------------------------------------------------
-# ⚠ — THE CITATION MECHANISM. **THE CLASS IS DERIVED FROM THE
+# ⚠ THE CITATION MECHANISM. **THE CLASS IS DERIVED FROM THE
 # CITATION; IT IS NOT DECLARED BESIDE IT.**
 # ---------------------------------------------------------------------------
 #
@@ -234,7 +234,7 @@ _DEFECT = witness.TOKEN_REFUSED_TOKEN_DEFECT
 # ***SO THERE IS ONE FIELD. The citation is a TYPE, and the class is a FUNCTION
 # of that type.*** **Nothing can disagree with anything, because there is only
 # one place the class comes from.** *Choosing the citation IS choosing the class,
-# at the moment the code is created, which is exactly what wanted.*
+# at the moment the code is created, which is exactly what the ruling wanted.*
 
 
 @dataclass(frozen=True)
@@ -256,7 +256,7 @@ class EvidenceFailed:
     """A substantive check RAN on well-formed evidence and it did not hold.
     **Implies `_DEFECT`.**
 
-    ⚠ **'s table has no row for this and it needs one.** *It says
+    ⚠ **The ruling's table has no row for this and it needs one.** *It says
     `_DEFECT` must cite "a clause of a standard the token violates" — but
     `rfc3161-imprint-mismatch` violates no clause: the token may be a perfectly
     good token about something else, as its own refusal says.* **Three of this
@@ -310,7 +310,7 @@ class Unresolved:
     this state when its stated reason cannot be written as a clause of a
     standard, as a check that ran, or as a limit of this build — **which is the
     signature of a code whose class was assigned by hand without anyone writing
-    down why.** *That is the family is trying to close, caught at
+    down why.** *That is the family the ruling is trying to close, caught at
     import instead of by the next repair.*
 
     **It carries the finding it is reported under and the class it currently
@@ -346,7 +346,7 @@ CAUSE_CITATIONS = {
         "this build holds no reducer for the representation the anchor "
         "declares; the anchor is the operator's provisioning and nothing was "
         "learned about the record"),
-    # ⚠⚠ landing A. **A KIND MISMATCH IS NOT A FAILED VERIFICATION.**
+    # ⚠⚠ Landing A. **A KIND MISMATCH IS NOT A FAILED VERIFICATION.**
     # The anchor is the operator's provisioning; a token signed under RSA and an
     # anchor carrying an Ed25519 key (or the reverse) tells us nothing whatever
     # about the record, so attempting the check and reporting "does not verify"
@@ -436,7 +436,7 @@ REFUSAL_CITATIONS = {
     # `_wrap`.* **All six are "these bytes are not a well-formed DER encoding of
     # the structure CMS and RFC 3161 define", which is one honest statement —
     # but a citation this general would also have covered the BOUND sites, which
-    # were NOT that.**.
+    # were NOT that.**
     "tst-structure": Standard(
         "X.690", "8-11",
         "the bytes are a well-formed DER encoding of the structure RFC 5652 "
@@ -447,7 +447,7 @@ REFUSAL_CITATIONS = {
         "no others"),
     # ⚠⚠ **THIS TEXT SAID "implements Ed25519 (1.3.101.112, RFC 8419) only; a
     # real TSA signing with RSA or ECDSA reaches this".** Landings A and B
-    # implemented RSA and ECDSA and admits `rsaEncryption`, so the
+    # implemented RSA and ECDSA and admitted `rsaEncryption`, so the
     # sentence became false and is replaced. **No claim is made about what
     # authorities usually sign with**: this build's own admitted set is a fact
     # it can state, and a prevalence claim is not.
@@ -455,7 +455,7 @@ REFUSAL_CITATIONS = {
         "this checker implements the signature algorithms in "
         "rfc3161.ADMITTED_SIGNATURE_ALGORITHMS; a TSA signing under any other "
         "identifier reaches this"),
-    # ⚠ landing B. The TOKEN's defect: RFC 3370 §3.2 leaves
+    # ⚠ Landing B. The TOKEN's defect: RFC 3370 §3.2 leaves
     # rsaEncryption's parameters no latitude, unlike the absent-versus-NULL
     # question RFC 5754 §2 settles for SHA-2 DIGEST identifiers.
     # ⚠⚠ **`BV-028`, 15 September 2026. A `BuildLimit`, DELIBERATELY.** A
@@ -525,19 +525,19 @@ WAIVED = tuple(sorted(c for c, cit in REFUSAL_CITATIONS.items()
 #: table above so that what was ruled and what was DERIVED from the ruled
 #: principle stay distinguishable.**
 #:
-#: ⚠ ** IS DISCHARGED HERE.** `tst-imprint-algorithm-unsupported` and
+#: ⚠ **A FILED FINDING IS DISCHARGED HERE.** `tst-imprint-algorithm-unsupported` and
 #: `tst-signer-count` were ratified `_SHORT` BY NAME and were
-#: deliberately absent from this table until now: moved the
-#: verifier for its own §1 and §2 and nothing else, so reported the gap
-#: and left it visible rather than harmonising it on sight.
-#: **A ruling required the register to say so, and the pack
+#: deliberately absent from this table until now: an earlier pack moved the
+#: verifier for its own §1 and §2 and nothing else, so the gap was reported
+#: and left visible rather than harmonised on sight.
+#: **A ruling required the register to say so, and this is the pack
 #: that may move it. Their CLASSIFICATION does not change; only its provenance,
 #: from derived-by-principle to ruled-by-name.**
 #:
-#: ***TWELVE entries, from eight.*** * said ten, and ten was right
-#: for the pack that named only 's two. This pack also mints
+#: ***TWELVE entries, from eight.*** *An earlier pack said ten, and ten was right
+#: for a pack that named only those two. This pack also mints
 #: `tst-attr-values-not-a-set` and
-#: `tst-missing-signing-certificate-attr` (`BV-029`, minted ), and both
+#: `tst-missing-signing-certificate-attr` (`BV-029`), and both
 #: are ruled by name, so the count the absorbed pack stated is superseded by its
 #: own successor's scope rather than missed.* **Recomputed by walking the table,
 #: not counted by eye.**
@@ -552,7 +552,7 @@ RULED_BY_NAME = {
     "tst-digest-algorithm-pairing-declined": _SHORT,
     "tst-digest-algorithm-not-permitted": _DEFECT,
     "rfc3161-signature-does-not-verify": _DEFECT,
-    # ⚠, and split **BOTH ARMS are
+    # ⚠ Ruled, and split. **BOTH ARMS are
     # ruled**, which is what makes this a split rather than a new code beside an
     # old one: what remains under `tst-attr-malformed` is SHORT, and the
     # standard-pinned attributes are the token's defect.
@@ -561,21 +561,21 @@ RULED_BY_NAME = {
     # ⚠ Ruled BY NAME.
     "tst-imprint-algorithm-unsupported": _SHORT,
     "tst-signer-count": _SHORT,
-    # ⚠: *"the TOKEN is wrong."* The residual
+    # ⚠ Ruled: *"the TOKEN is wrong."* The residual
     # `tst-attr-malformed` above stays `_SHORT`, so **both arms of this split
-    # carry their provenance too**, exactly 's two do.
+    # carry their provenance too**, exactly as the two above do.
     "tst-attr-values-not-a-set": _DEFECT,
-    # ⚠ `BV-029`, minted and implemented **Ruled by
+    # ⚠ `BV-029`, minted and implemented. **Ruled by
     # the clause rather than by a refusal table**, which is stronger: the
     # specification names the requirement and requires the checker to assert it.
     "tst-missing-signing-certificate-attr": _DEFECT,
-    # ⚠: a bound the OPERATOR provisioned being
+    # ⚠ Ruled: a bound the OPERATOR provisioned being
     # reached is `BV-028`'s "we are short", never the token being wrong.
     "tst-provisioned-bound-exceeded": _SHORT,
 }
 
 # ---------------------------------------------------------------------------
-# ⚠ — THE IMPORT-TIME CHECKS. **THIS IS THE SWEEP.**
+# ⚠ THE IMPORT-TIME CHECKS. **THIS IS THE SWEEP.**
 # ---------------------------------------------------------------------------
 # *Four manual sweeps did not close the classification family. These run on
 # every import, for ever, at no cost — and a code that cannot be cited stops the
@@ -638,8 +638,8 @@ if set(REFUSAL_CITATIONS) != set(rfc3161.REFUSALS):          # pragma: no cover
 # IMPOSSIBLE RATHER THAN MERELY VISIBLE.**
 # ---------------------------------------------------------------------------
 #
-# ***A CITATION PER CODE DOES NOT, BY ITSELF, CLOSE THE FAMILY — AND IS
-# THE PROOF.*** **The ambiguity that produced generation four did not live in a
+# ***A CITATION PER CODE DOES NOT, BY ITSELF, CLOSE THE FAMILY — AND THE
+# FOURTH GENERATION IS THE PROOF.*** **The ambiguity that produced generation four did not live in a
 # code and did not live in a raise site: it arrived AT the raise site, inside a
 # `der.DerError`.** *Before the split, `tst-structure` was reachable from both a
 # clause violation and an operator's provisioned bound. Whoever wrote its
@@ -717,7 +717,7 @@ def make_verifier(*, limits: der.Limits):
             anchor_kind, anchor_key = key_forms.reduce_to_key(
                 key_material, fmt, limits=limits)
         except key_forms.KeyFormError as exc:
-            # ⚠ BOTH are `TOKEN_REFUSED_CHECKER_SHORT`, ruled BY NAME at
+            # ⚠ BOTH are `TOKEN_REFUSED_CHECKER_SHORT`, ruled BY NAME.
             # The second reads as the ANCHOR's defect and the
             # comment above said so -- but an anchor is the OPERATOR's
             # provisioning, never the record's evidence, so nothing whatever was
@@ -736,11 +736,11 @@ def make_verifier(*, limits: der.Limits):
         try:
             parsed = rfc3161.parse_token(token, limits=limits)
         except rfc3161.Rfc3161Error as exc:
-            # ⚠ REPAIRED Until now every parse refusal
+            # ⚠ REPAIRED. Until now every parse refusal
             # returned one cause and one bool, so `tst-structure` (the token is
             # malformed) and `tst-signature-algorithm-unsupported` (**every
             # real-world RSA or ECDSA timestamp authority**) left this function
-            # indistinguishable and both became `REFUTED`. **That was.**
+            # indistinguishable and both became `REFUTED`. **That was the defect.**
             #
             # The class now comes from `PARSE_REFUSAL_CLASSES`, which is checked
             # against `rfc3161.REFUSALS` for set equality at import.
@@ -777,13 +777,13 @@ def make_verifier(*, limits: der.Limits):
         # (2) BV-010. `key_material` is the ANCHOR's, and it is the only key
         # material in scope here.
         #
-        # ⚠⚠ ** LANDING A: THE CHECK DISPATCHES ON THE TOKEN'S OWN
+        # ⚠⚠ **LANDING A: THE CHECK DISPATCHES ON THE TOKEN'S OWN
         # SIGNATURE ALGORITHM.** Until this landing `rfc3161.py` admitted one
         # algorithm, so this line could call Ed25519 unconditionally and be
         # right. It now admits four, and calling Ed25519 over an RSA signature
         # would report `does-not-verify` for a check never attempted — which is
         # `ERR-P3-008`'s distinction inverted inside one function.
-        # ⚠⚠ **A THREE-KIND MATRIX LANDING B.** Every off-diagonal
+        # ⚠⚠ **A THREE-KIND MATRIX AT LANDING B.** Every off-diagonal
         # cell of ed25519 × rsa × ec refuses and is never attempted: a kind
         # mismatch is the operator's provisioning and says nothing whatever
         # about the record (`BV-028`). Derived from the algorithm, never

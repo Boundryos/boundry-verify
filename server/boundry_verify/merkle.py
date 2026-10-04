@@ -49,14 +49,14 @@ def leaf_hash(cef_bytes: bytes) -> bytes:
 def interior_hash(left: bytes, right: bytes) -> bytes:
     """SHA-256(0x01 || left || right).
 
-    BV-031 limb 1, ported here ⚠ This was ABSENT until
+    BV-031 limb 1, ported here. ⚠ This was ABSENT until
     31 Aug 2026: it accepted a 31-byte left and returned a digest, while the
     producer refused the same input by name. Limb 1 was ported to
     `merkle_tree_hash` and NOT to this function, because that pack was scoped
     to the defect that had been OBSERVED -- and an agreement sweep found
     this one deliberately, on its first run.
 
-    's rule in a third context: an exclusion that enumerates instances is
+    The same rule, in a third context: an exclusion that enumerates instances is
     a snapshot of what the author happened to think of. So is a REPAIR.
     """
     if not isinstance(left, (bytes, bytearray)) or not isinstance(right, (bytes, bytearray)):
@@ -86,7 +86,7 @@ def _split(n: int) -> int:
 def _checked_split(n: int) -> int:
     """`_split` with its PROGRESS guarantee enforced at the call site.
 
-    > **⚠ What this is, and what it is NOT (`BV-022`, asked ).**
+    > **⚠ What this is, and what it is NOT (`BV-022`).**
     > This is a **per-step monotone-decrease invariant**, and that is all it is.
     > It is **not** `BV-022`, it does **not** terminate by exhaustion, and it is
     > **not** an internal cap. *`BV-022` is a property of a WALK; this is a
@@ -100,7 +100,7 @@ def _checked_split(n: int) -> int:
     > walking it — is the `len(audit_path) != len(decisions)` check**, which
     > predates this pack. *Neither line is `BV-022` on its own.*
 
-    > **⚠, from a mutation that had been scored as killed
+    > **⚠ Added from a mutation that had been scored as killed
     > for a day and a half.** `M06` moves the split to the largest power of two
     > **<= n**, so for a power-of-two `n` it returns `n` itself: the recursion
     > stops shrinking and the verifier never returns. **`T-3` added a probe
@@ -128,14 +128,14 @@ def _checked_split(n: int) -> int:
 
 
 def _assert_leaf_hashes(leaves: list[bytes], where: str) -> None:
-    """BV-031 limb 1, ported to the verifier
+    """BV-031 limb 1, ported to the verifier.
 
     ⚠ This was ABSENT here until 31 Aug 2026. `merkle_tree_hash` returned
     `leaves[0]` unchecked for n == 1 — the one case the recursion never
     reaches — so a 6-byte value passed straight through AS A ROOT. The
     producer closed this; the verifier was left untouched to preserve
     X-07's pin, and the pin protected a measurement while freezing the defect
-    into the artefact it was protecting (minted).
+    into the artefact it was protecting.
 
     This is the STANDALONE artefact handed to bundle consumers. It is the
     thing an outside party runs.
@@ -264,7 +264,7 @@ def _expected_consistency_proof_len(old_size: int, new_size: int) -> int:
     tree sizes ALONE. **Both are read from signed bytes; the proof is not
     consulted.** That is what makes the bound trustworthy enough to refuse on.
 
-    > **⚠, because `verify_consistency` did NOT satisfy
+    > **⚠ Added because `verify_consistency` did NOT satisfy
     > `BV-022` and `verify_inclusion` did.** Measured, not assumed: an over-long
     > consistency proof was **WALKED** — its first element consumed and hashed
     > before any length was checked, the surplus noticed only by the trailing
@@ -385,7 +385,7 @@ def verify_consistency(old_size: int, new_size: int, old_root: bytes,
 #: ⚠ **THE RULE-NAMING IDENTIFIER**: *the leaf is
 #: the hash of the canonical envelope form the record itself declares; a record
 #: carrying no declaration is v1 by `D1-c`.* `…-cef3` is refused by that ruling:
-#: a version token on a version-agnostic construction is 's trap
+#: a version token on a version-agnostic construction is a trap
 #: pre-built.
 CONSTRUCTION_ID_AS_DECLARED = "merkle-rfc6962-sha256-cef-as-declared"
 
@@ -397,7 +397,7 @@ CONSTRUCTION_ID_AS_DECLARED = "merkle-rfc6962-sha256-cef-as-declared"
 #:
 #: ⚠ **`…-cef1` IS NEVER REMOVED.** Every checkpoint that carries it is still
 #: true, and a verifier that dropped it would strand every receipt ever issued
-#: — `BV-028`'s territory, and the reason b keeps both.
+#: — `BV-028`'s territory, and the reason a ruling keeps both.
 CONSTRUCTIONS = {
     CONSTRUCTION_ID: {
         "leaf_hash": leaf_hash,

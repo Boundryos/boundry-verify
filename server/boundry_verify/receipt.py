@@ -1,7 +1,7 @@
 """Witness receipts — `ERRATA_P3_02` (`ERR-P3-004`, `ERR-P3-005`, `ERR-P3-007`).
 
 **Status of the governing document.** `ERRATA_P3_02` is **RATIFIED** (30 Aug
-2026; ) and registered in the programme's corpus at sequence
+2026) and registered in the programme's corpus at sequence
 5. Neither the document nor that register ships with this package. What ships
 is this module, and the ratified text was re-read and checked clause by clause
 against it — they agree. The question is CLOSED.
@@ -112,7 +112,7 @@ class Receipt:
     @property
     def token_verified(self) -> bool:
         """Always False, and that is a property of the design, not a gap in the
-        effort. See `unverifiable_because` and."""
+        effort. See `unverifiable_because`."""
         return False
 
     @property

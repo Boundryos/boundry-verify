@@ -1,6 +1,6 @@
 """The Canonical Envelope Form, version 1 — the Merkle leaf.
 
- (RATIFIED v1.0) and
+Written from the envelope-form specification (RATIFIED v1.0) and
 `ERRATA_CEF_v1_flag_meaning_and_construction_v0.1` alone.
 
 ⚠ The specification's own status line: PROPOSED — NOT IMPLEMENTED. No record

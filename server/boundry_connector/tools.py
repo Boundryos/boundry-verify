@@ -5,7 +5,7 @@ the instance: it opens files for reading and returns a dict. **Nothing here
 writes, signs, attaches to a database, subscribes to an emitter, or opens a
 socket.**
 
-⚠ **THAT SENTENCE MAKES FIVE CLAIMS AND FOR TWO OF THEM NOTHING EXISTED.** The
+⚠ **THAT SENTENCE MAKES FIVE CLAIMS AND FOR TWO OF THEM NOTHING EXISTED.** A
 prose sweep read it as five: three were measured —
 `test_the_package_cannot_sign`, `test_the_package_holds_no_database_handle`,
 `test_the_package_imports_no_networking_of_any_kind` — and **writes** and
@@ -28,7 +28,7 @@ the engine's own check would be the substrate confirming itself; the whole
 value of the answer is that a second implementation agrees.
 
 ⚠ **THERE IS NO WRITE SURFACE HERE AT ALL** — not a disabled one, not a
-refusing one. decided 's filed disagreement in favour of the
+refusing one. A ruling decided a filed disagreement in favour of the
 wall: the stub is gone from the listing and from the dispatcher.
 
 ⚠ **WHAT THE READ TOOLS DO NOT WRAP.** They do not wrap
@@ -91,7 +91,7 @@ _VERIFIER_INSTRUMENT = (
 #:
 #: The wording is defined once here and every tool serves exactly it.
 def _not_in_scope_detail(record_id: str) -> str:
-    # ⚠: `record_id` is client-supplied, and `"../../../etc/passwd"` was
+    # ⚠ `record_id` is client-supplied, and `"../../../etc/passwd"` was
     # echoed here — it was recorded as held, with the echo elided.
     # A plain id renders exactly as before, so ONE WORDING FOR FIVE TOOLS holds.
     return (f"no record {_shown(record_id)} within the declared scope. It may exist "
@@ -142,7 +142,7 @@ def verify_record(*, corpus_dir: str, record_id: str,
     if not match:
         # ⚠ the SAME refusal `get_envelope` and `explain_record` serve, so an
         # id that is another tenant's and an id that does not exist are one
-        # answer. This is the whole 's first limb.
+        # answer. This is the whole of the rule's first limb.
         return _refusal("envelope-not-in-scope",
                         _not_in_scope_detail(record_id),
                         instrument=_SCOPE_INSTRUMENT)
@@ -330,8 +330,8 @@ def chain_status(*, corpus_dir: str, tenant_scope: str | None = None,
     body: dict[str, Any] = {
         "outcome": "OK",
         # ⚠ EXP-006 — LABELS, NEVER PATHS. This returned `str(corpus_dir)`
-        # until. In the practice's folder structure a client's path is
-        # their NAME, and named the open route: not a record
+        # earlier. In the practice's folder structure a client's path is
+        # their NAME, and a finding named the open route: not a record
         # reaching canon, but a client's name arriving inside a figure somebody
         # pasted into a report. **A path is configuration; it is not output.**
         "root_label": corpus.label_of(corpus_dir) or "(unlabelled root)",
@@ -470,7 +470,7 @@ def explain_record(*, corpus_dir: str, record_id: str,
 #: touched here, so no register act falls out of this change.
 # ------------------------------------------------------ the evaluation kit ---
 #: The kit's two tools, and `explain_record`'s walk of an export. Each reads a
-#: root through `Corpus` (the one confined opener, ), under the one scope rule, and renders
+#: root through `Corpus` (the one confined opener), under the one scope rule, and renders
 #: identifiers, hashes and the record's own words — a path is not among them.
 _KIT_INSTRUMENT = (
     "boundry_connector.kit over VERIFIER/boundry_verify — CF-ENC-001 canonical form, RFC 8032 "
@@ -734,9 +734,9 @@ def dispatch(name: str, arguments: dict[str, Any]) -> dict:
                         f"this server registers {sorted(_DISPATCH)}; "
                         f"{_shown(name)} is not among them",
                         instrument="CONNECTOR/boundry_connector/tools.py")
-    # ⚠: this rendered `str(exc)` of the TypeError, which quotes the
-    # argument NAME the client sent — a planted path came back verbatim (
-    # `DEVB-10`). The arguments are now BOUND first, and the refusal names the
+    # ⚠ This rendered `str(exc)` of the TypeError, which quotes the
+    # argument NAME the client sent — a planted path came back verbatim
+    # (`DEVB-10`). The arguments are now BOUND first, and the refusal names the
     # tool's own declared parameters, which are the server's words, not the
     # client's. A TypeError raised INSIDE a tool is no longer mistaken for one.
     params = sorted(_inspect.signature(fn).parameters)
@@ -752,7 +752,7 @@ def dispatch(name: str, arguments: dict[str, Any]) -> dict:
     try:
         return fn(**arguments)
     except Exception as exc:
-        # ⚠. Two rendering paths escaped the conversation-side
+        # ⚠ Two rendering paths escaped the conversation-side
         # rule: a raw interpreter message, and — worse — an UNCAUGHT exception,
         # which reached no payload at all and took the server down with it.
         # **Every answer this connector gives now carries a ladder**, including
@@ -760,9 +760,9 @@ def dispatch(name: str, arguments: dict[str, Any]) -> dict:
         # bounded; a traceback is not conversation content.
         return _refusal(
             "tool-failed-unexpectedly",
-            # ⚠: the exception's TEXT is no longer rendered at all. An
-            # `OSError`'s text carries the full path it failed on (
-            # `DEVB-6`, `DEVB-7` echoed the scratch path verbatim), and nothing
+            # ⚠ The exception's TEXT is no longer rendered at all. An
+            # `OSError`'s text carries the full path it failed on
+            # (`DEVB-6`, `DEVB-7` echoed the scratch path verbatim), and nothing
             # a caller needs is in it that the type and the errno do not say.
             f"{type(exc).__name__}"
             + (f" ({_errno.errorcode.get(exc.errno, '?')})"
@@ -772,14 +772,14 @@ def dispatch(name: str, arguments: dict[str, Any]) -> dict:
             instrument="CONNECTOR/boundry_connector/tools.py")
 
 
-#: ⚠ **THE SENTENCES A MODEL READS BEFORE EVERY TURN, GOVERNED BY DIGEST**
-#: ( V4, ). ⚠ **STILL TRUE AT `231f30a`, AND NOW MEASURED:**
+#: ⚠ **THE SENTENCES A MODEL READS BEFORE EVERY TURN, GOVERNED BY DIGEST.**
+#: ⚠ **STILL TRUE AT `231f30a`, AND NOW MEASURED:**
 #: `TOOL_SCHEMAS` is a tuple of DICTS, outside all five `RECOGNISED_SHAPES`, so
 #: `vocabulary_sweep` skips it SILENTLY —
 #: `test_G4_TOOL_SCHEMAS_is_invisible_to_the_sweep_and_the_DIGESTS_are_not`
 #: asserts exactly that, and fires if the shapes are ever widened to reach it.
 #:
-#: **PAST, and it is past because repaired it:** the register once
+#: **PAST, and it is past because it was repaired:** the register once
 #: governed the tool NAMES while the descriptions travelled ungoverned. The
 #: register recorded that as a gap and left widening the shapes to RESEARCH.
 #:
@@ -803,7 +803,7 @@ def dispatch(name: str, arguments: dict[str, Any]) -> dict:
 # LITERAL, and it has to stay one: the shipped checks read it out of this file with
 # `ast.literal_eval`, so that what they check is the source rather than whatever the import
 # produced. A derived string cannot live inside a literal. Typing it into all seven would be the
-# second copy forbids — and the copy that goes stale is always the one nothing derives.
+# forbidden second copy — and the copy that goes stale is always the one nothing derives.
 #
 # > ***DERIVE IT, AND THERE IS NOTHING TO KEEP IN STEP. ATTACH IT, AND THE LITERAL STAYS A
 # > LITERAL.***

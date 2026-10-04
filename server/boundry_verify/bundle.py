@@ -1,16 +1,16 @@
 """Bundle parsing — STOP-B, rebuilt.
 
 **Built from the specification alone.** The kernel repository has not been read
-and this consumer has not seen the exporter, which makes
+and this consumer has not seen the exporter, which its governing order makes
 the acceptance criterion rather than the hygiene.
 
 > **⚠ THE SPECIFICATION VERSION THIS MODULE IMPLEMENTS IS NAMED, NOT ASSUMED.**
->, block hash
+> The verification-bundle specification, block hash
 > `86d6c4c54ea9a7e9a3719499ab70d4b75b0441fe7da50777f4e088dc5cea34c2`,
 > **51769 bytes**, *`BV-001`…`BV-029`* — **RE-DERIVED.**
 >
-> **The pin this replaced named 39411 bytes, `0100c67c…`, `BV-001`…`BV-027`
-> "through ", and CARRIED ITS OWN STALENESS AS TEXT**: *"was true when
+> **The pin this replaced named 39411 bytes, `0100c67c…`, `BV-001`…`BV-027`,
+> and CARRIED ITS OWN STALENESS AS TEXT**: *"was true when
 > written; the file was not re-derived when the document was amended."*
 > **⚠ It then went stale a second time, by 12358 bytes and two clauses, and the
 > sentence admitting the first drift did nothing to catch the second.**
@@ -40,7 +40,7 @@ old rule forbade `record.envelope.payload_hash`, which `CEF-001` requires.
 ## What changed from STOP-A, and why the file was rewritten rather than patched
 
 STOP-A read the bundle as a **map** with a `bundle_encoding_id` key, because
-that is what described. **`H-2` reported that such a key
+that is what the order described. **`H-2` reported that such a key
 cannot be positionally first under deterministic CBOR**, and `BV-002` answers it
 by changing the shape: **the bundle is a two-item array `[encoding_id, body]`**,
 so item 0 is first by construction and a reader cannot reach the body without
@@ -53,8 +53,8 @@ in the name.
 
 ## ⚠ What changed, and it is a VERSION SKEW rather than a reading
 
-**This module implemented as it stood before
-.** `RECORD_KEYS` carried `cose_sign1`; `CHECKPOINT_KEYS` carried
+**This module implemented the bundle specification as it stood before
+it was amended.** `RECORD_KEYS` carried `cose_sign1`; `CHECKPOINT_KEYS` carried
 `cose_sign1`; **neither carried `signature` or `signature_form`, which
 `BV-025` made required on both.** Every bundle exported under the current
 document was refused at `bundle-unknown-key`, which is the correct refusal for
@@ -98,12 +98,12 @@ __all__ = ["BundleError", "Bundle", "BUNDLE_VERSION", "THIS_VERSION_ENCODING_ID"
 #: `BV-007`: `1` for the form ratified 30 Aug 2026.
 BUNDLE_VERSION = 1
 
-#: `BV-007` /: the version whose `record.envelope` is the v3
+#: `BV-007`: the version whose `record.envelope` is the v3
 #: canonical form — the sealed author. **The body's own key set is the same in
 #: both;** what a version numbers here is the closed sub-map of §5.
 BUNDLE_VERSION_V2 = 2
 
-#: ⚠ **BOTH, AND THE OLD ONE IS NEVER DROPPED** (b). *Every
+#: ⚠ **BOTH, AND THE OLD ONE IS NEVER DROPPED**. *Every
 #: `bundle_version: 1` bundle stays verifiable forever* — a verifier that
 #: retired a version would turn evidence somebody already holds into bytes
 #: nobody can read, which is the one thing an offline verifier exists to
@@ -124,7 +124,7 @@ THIS_VERSION_ENCODING_ID = "bundle-cbor-det-cf1"
 #: because it had heard of it would be certifying its own guess in a newer
 #: place. It is provisioned or it is refused.
 #:
-#: ⚠ **`cf1` STILL NAMES, WHICH HAS NOT
+#: ⚠ **`cf1` STILL NAMES THE CANONICAL-FORM SPECIFICATION, WHICH HAS NOT
 #: MOVED.** The CBOR narrowing is the same table; the `-v2` is the BUNDLE's
 #: version. `BV-006` says an identifier that can be read two ways is
 #: under-named, and *canonical form 2* is the other reading.
@@ -144,7 +144,7 @@ BODY_REQUIRED = ("bundle_version", "record", "checkpoint", "inclusion_proof",
 BODY_OPTIONAL = ("key_directory_hint", "json_view", "prior_checkpoint",
                  "consistency_proof")
 
-#: `BV-008`, NO-RESTATEMENT, **as narrowed **. Each of these is inside a
+#: `BV-008`, NO-RESTATEMENT, **as narrowed**. Each of these is inside a
 #: COMMITTED object, so an uncommitted copy in the container is *"a second place
 #: to put a different one"*. Named separately from the closed-set check so the
 #: refusal says WHY rather than merely "unknown key" — the two are different
@@ -197,9 +197,9 @@ REFUSALS = (
     "bundle-missing-key",
     "bundle-field-type",
     "bundle-version-unknown",
-    # ---: one version, one identifier ---------------------
+    # --- one version, one identifier ---------------------
     "bundle-encoding-version-mismatch",
-    # --- BV-023, --------------------------------------
+    # --- BV-023 --------------------------------------
     "bundle-size-bound-not-provisioned",
     "bundle-too-large",
 )
@@ -375,7 +375,7 @@ def parse(data: bytes, *, recognised_encodings: frozenset[str],
        table in full;
     2. **re-encode and compare byte-for-byte** — refused here, *before the
        bundle's own claim about its encoding is consulted*. `H-2` reported this
-       inversion and ratified it as **stricter, not weaker**: the
+       inversion, and it was ratified as **stricter, not weaker**: the
        round-trip is a property of the bytes and needs no permission from the
        document to be checked;
     3. **read `encoding_id`**, item 0, and refuse unless provisioned;

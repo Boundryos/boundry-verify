@@ -15,9 +15,9 @@ eight unrelated classes and a third party's exceptions travel beside them.
 `test_bridge_exp001.test_V3_every_refusal_in_both_packages_descends_from_one_root`
 walks exactly two packages — the two named above — so a refusal raised anywhere
 else in the programme was covered by the sentence and by nothing else.
- names three that live outside the root: `IgnoreRefused`, `WriteRefused`
+A finding names three that live outside the root: `IgnoreRefused`, `WriteRefused`
 and `FileRefused`. They are NOT re-parented here: that would make `REGISTERS/`
-import the connector and invert the dependency (b(6)).
+import the connector and invert the dependency.
 
 > ***A SENTENCE THAT CLAIMS THE WHOLE PROGRAMME AND A VECTOR THAT WALKS TWO
 > PACKAGES ARE NOT THE SAME PROMISE. THE PROSE MOVES TO THE VECTOR, BECAUSE THE
@@ -31,7 +31,7 @@ information away** — the same shape: a boundary that swallows what it
 catches is worse than one that never caught it.
 
 ⚠ **THIS DOES NOT MAKE A REFUSAL CORRECT.** It makes the set of types a caller
-must handle closed and nameable. 's second defect — a refusal that
+must handle closed and nameable. A second defect — a refusal that
 misnamed its cause — is untouched by anything here.
 
 ⚠ **K-3.** Import is definitions only: no I/O, no clock, no network.
@@ -46,8 +46,8 @@ import re as _re
 #: CANNOT KNOW WHICH CLIENT-SUPPLIED STRING IS ONE.** Five refusals rendered a
 #: value the client supplied — a record id, a tool name, an argument name, a
 #: `tenant_scope`, a JSON-RPC method — and every one of them echoed a planted path
-#: over a real pipe ( attack `DEVB-10`, and 's own `record_id=
-#: "../../../etc/passwd"`, whose echo elided as "…"). So the rule is
+#: over a real pipe (attack `DEVB-10`, and a `record_id=
+#: "../../../etc/passwd"`, whose echo was elided as "…"). So the rule is
 #: stated about the VALUE, not the field: a value is rendered only if it is a
 #: PLAIN IDENTIFIER — letters, digits, `.`, `_`, `-`, starting alphanumeric, no
 #: `..`, at most 128 characters. A value carrying a path separator or a `..`

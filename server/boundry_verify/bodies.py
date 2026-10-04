@@ -1,5 +1,5 @@
 """What is hashed (§6) and identifier derivation (§7), from
- alone.
+the canonical-form specification alone.
 
 §6 answers *which* value is canonicalised. The specification's own warning
 applies: getting this wrong is the most common way to produce correct bytes
@@ -42,7 +42,7 @@ def sealed_plan_body(plan: Mapping[str, Any], *, warn: list[str] | None = None) 
     CF-SEAL-002: the signature covers exactly these same bytes. There are not
     two serialisations.
 
-    ** — RULED by `ERR-P3-003`:** `None` is **PRESENT** and emits as
+    **RULED by `ERR-P3-003`:** `None` is **PRESENT** and emits as
     `null`, **except where a prune rule names that key**, in which case it is
     ABSENT and omitted entirely. *"Absence is produced only by an explicit prune
     rule; it is never inferred from a value"* — **pruning is a property of the
@@ -154,10 +154,10 @@ NAMESPACES = {                                        # CF-ID-002: fixed for v1
 
 
 class IdentifierKind(_enum.StrEnum):
-    """⚠ **THE CLOSED SET `_derive` ACCEPTS** (`TYPE-001`, ).
+    """⚠ **THE CLOSED SET `_derive` ACCEPTS** (`TYPE-001`).
 
-    `_derive` SUBSCRIPTS `NAMESPACES` and tests membership nowhere: measured at
-it is the **one site of seventeen** where a governed vocabulary
+    `_derive` SUBSCRIPTS `NAMESPACES` and tests membership nowhere: as measured,
+    it is the **one site of seventeen** where a governed vocabulary
     reaches a parameter that assumes membership rather than checking it. The
     other sixteen are validation boundaries whose whole job is to refuse a
     non-member, and a type forbidding what they exist to refuse would delete
@@ -270,7 +270,7 @@ def legacy_chain_head(envelope_identifiers: Sequence[str]) -> str:
 # §9 — fields that reach no canonical byte by any path, and therefore have no
 # cryptographic protection whatsoever. An implementation MUST NOT present these
 # as verified.
-# ⚠: the plan seal is stored beside the
+# ⚠ The plan seal is stored beside the
 # envelope's own signature and outside `payload_canonical_bytes`, so it is
 # unbound here too — see `envelope_form.UNBOUND_FIELDS` for the reason this
 # had to be written by hand.

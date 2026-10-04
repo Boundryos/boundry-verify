@@ -9,7 +9,7 @@ Scope: §5.1.7 (Verify) and the primitives it needs — §5.1.2 encoding,
 from the verifier.** The test-only signer used to build synthetic material
 lives in `testing/synthetic.py` and is not importable from here.
 
-⚠: this is straightforward modular arithmetic on Python ints and
+⚠ This is straightforward modular arithmetic on Python ints and
 is NOT constant-time. For a verifier that is acceptable — it handles only public
 values (public key, signature, message) and holds no secret — but it must never
 be reused for signing, and that is why no signing primitive is defined here.

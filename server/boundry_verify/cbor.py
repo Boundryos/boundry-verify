@@ -1,12 +1,12 @@
 """Deterministic CBOR — RFC 8949, core deterministic encoding (section 4.2.1).
 
- STOP-A. **Standard library only**, guardrail 2 requires:
+STOP-A. **Standard library only**, as guardrail 2 requires:
 the verifier must run where nothing can be installed. Written from RFC 8949
 alone; the RFC is a permitted input exactly as RFC 8032 and RFC 6962 were.
 
 ## Why both a strict decoder AND a re-encode comparison
 
- requires that what is parsed be re-encoded and compared
+The governing order requires that what is parsed be re-encoded and compared
 byte for byte. That check alone is not enough, and the strict decoder alone is
 not enough either:
 
@@ -22,7 +22,7 @@ single reading.** (`ATTRIBUTION-NEEDS-TWO-READINGS`, applied to a codec.)
 
 ## What is deliberately refused
 
-**Floats, in every width.** `CF-TYPE-001`
+**Floats, in every width.** The canonical form's `CF-TYPE-001`
 refuses them from the canonical form, and a bundle codec that accepts a value
 the canonical form cannot express would let a record exist that can never be
 re-canonicalised. **Marked as this implementation's decision, not the RFC's** —
@@ -32,7 +32,7 @@ RFC 8949 permits floats and section 4.2.2 gives their deterministic rules.
 `undefined`, duplicate map keys, out-of-order map keys.** All are either
 forbidden by section 4.2.1 or unrepresentable under it.
 
-## ⚠: the narrowing is a PROFILE, and it was only half here
+## ⚠ The narrowing is a PROFILE, and it was only half here
 
 `BV-005` gives a seven-row table and this module implemented four rows of it.
 **Floats, indefinite lengths, duplicate keys and key order were enforced; TEXT
@@ -78,7 +78,7 @@ REFUSALS = (
     "cbor-map-keys-unsorted",
     "cbor-unencodable-type",
     "cbor-round-trip-differs",
-    # --- BV-005's remaining three rows, ---------------
+    # --- BV-005's remaining three rows ---------------
     "cbor-map-key-not-text",
     "cbor-text-not-nfc",
     "cbor-tag-not-permitted",

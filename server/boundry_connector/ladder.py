@@ -1,7 +1,7 @@
 """The claim ladder that rides on every answer this connector gives.
 
 `TEN-003` governs every sentence anyone says about the tenant slice, and
-the scope rule requires every tool's answer to carry what is PROVEN versus what is
+the connector's specification requires every tool's answer to carry what is PROVEN versus what is
 ATTESTED. This module is the one place those sentences live, so a tool cannot
 quietly say something stronger than the programme has earned.
 

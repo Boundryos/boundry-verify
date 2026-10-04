@@ -2,7 +2,7 @@
   "manifest_version": "0.3",
   "name": "boundry-verify",
   "display_name": "Boundry Verify",
-  "version": "0.3.1-stage1",
+  "version": "0.3.2-stage1",
   "description": "A local, read-only MCP server over sealed Boundry records. Contacts nothing; reads folders you declare. Requires Python 3.12 or newer.",
   "long_description": "Requires Python 3.12 or newer. A stock macOS `python3` is older than that, and this package refuses before doing any work rather than running with parts of itself missing.\n\nWhat it claims, in one sentence: one key signs everything and you hold it; the determinism shown is for the governed road, on the workloads in the kit, across the platforms named.\n\nNothing leaves your machine through this connector: it opens no socket and contacts no endpoint. Everything it renders is read by a model, as ordinary conversation content — see `PRIVACY.md`, which ships beside this file.",
   "author": {

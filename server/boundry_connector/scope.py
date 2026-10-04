@@ -1,9 +1,9 @@
 """The tenant gate on the CONNECTOR's OWN read path — `TEN-002`, owed honestly.
 
-⚠ **WHY THIS MODULE EXISTS AT ALL.** measured that
+⚠ **WHY THIS MODULE EXISTS AT ALL.** A measurement found that
 `routes_envelopes.py`, `routes_replay.py`, `streaming.py` and
 `envelope_view.py` return envelopes and consult NO tenant discriminator, and
- accepted the correction that a schema declaration enforces nothing —
+a ruling accepted the correction that a schema declaration enforces nothing —
 **enforcement lives on the read path**. A connector that wraps those four
 surfaces inherits four unenforced read paths. So the connector adds the
 enforcement on ITS path, here, and every envelope-returning tool goes through
@@ -17,7 +17,7 @@ a boundary rather than to a path: *defined once, derived everywhere else.*
 
 ⚠ **ABSENCE REFUSES, AND THAT IS THE WHOLE POINT.** `TEN-002(a)`: a selector
 that declares nothing was silently omniscient, and the cure was to refuse.
-⚠ **THIS SENTENCE WENT FALSE AND THE SWEEP CAUGHT IT** ).
+⚠ **THIS SENTENCE WENT FALSE AND THE SWEEP CAUGHT IT.**
 It read *"`auth.py` STILL HAS the opposite default in two places"* — an envelope
 with no `submitter_principal_id`, and a body with no `submitter_domain_ref`,
 readable by anyone authenticated. **That was true when written and is not true
@@ -121,7 +121,7 @@ def apply_scope(rows: list[Any], *, tenant_scope: str | None,
     """Scope `rows` (anything carrying `.submitter_domain_ref`).
 
     Absence of `tenant_scope` REFUSES. `global` is a DECLARED scope and passes
-    through unfiltered — the declaration is its identity, which is 's
+    through unfiltered — the declaration is its identity, which is a
     distinction and not a loophole. `per_tenant` without a context refuses.
     """
     if tenant_scope is None:

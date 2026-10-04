@@ -1,4 +1,4 @@
-"""Reducing a key REPRESENTATION to the KEY IT DENOTES — /.
+"""Reducing a key REPRESENTATION to the KEY IT DENOTES.
 
 **Built from RFC 8032 §5.1.5, RFC 8410 §3 and RFC 5280 §4.1 alone.** The kernel
 repository has not been read, and `INTEROP/` was not opened to write this: the
@@ -10,7 +10,7 @@ not the ones any artefact happens to carry.
 `BV-011` as first written compared `key_material` for BYTE equality and `format`
 for STRING equality. **The first interoperation run reported the bundle's key as
 differing from the anchor's when they were the same key** — a certificate on one
-side, the raw 32 bytes it embeds on the other. **`BV-011` is CORRECTED at
+side, the raw 32 bytes it embeds on the other. **`BV-011` is CORRECTED:
 it compares KEYS, not ENCODINGS**, and *a difference in `format` alone
 is not a difference in key.*
 
@@ -88,7 +88,7 @@ ED25519_RAW = "ed25519-raw"
 SPKI_DER = "spki-der"
 X509_DER = "x509-der"
 
-#: **DECLARED, not provisioned.***"whatever set you implement is
+#: **DECLARED, not provisioned.** *"whatever set you implement is
 #: a provisioned or declared fact about the checker."* This set is a property of
 #: this build and is published here so that a consumer can read it without
 #: reading the source. **A format outside it is `NOT COMPARED`, never a
@@ -107,7 +107,7 @@ REFUSALS = (
     "key-algorithm-not-ed25519",
     "key-algorithm-not-reducible",
     "key-rsa-material-malformed",
-    # ⚠ landing B. THE FIRST TWO ARE OUR GAP, THE SECOND TWO ARE THE
+    # ⚠ Landing B. THE FIRST TWO ARE OUR GAP, THE SECOND TWO ARE THE
     # KEY'S DEFECT, and the split is the whole point (`BV-028`).
     "key-ec-curve-not-implemented",
     "key-ec-point-compressed",
@@ -322,7 +322,7 @@ def reduce_to_ed25519(key_material, fmt, *, limits) -> bytes:
 
 def _reduce(key_material, fmt, *, limits) -> tuple:
     """`(kind, material)`. The body `reduce_to_ed25519` carried until
-     landing A, with the kind now named rather than assumed.
+    landing A, with the kind now named rather than assumed.
 
     Raises `KeyFormError`, whose `code` names **whose** fact stopped it.
 

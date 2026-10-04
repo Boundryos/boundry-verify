@@ -1,6 +1,6 @@
 """COSE_Sign1 verification — STOP-B.
 
-**Built from RFC 9052, and `ERR-P3-006` alone.**
+**Built from RFC 9052 and `ERR-P3-006` alone.**
 The kernel repository has not been read.
 
 `BV-005` and `BV-006` put a `cose_sign1` byte string beside the bytes it signs,
@@ -18,8 +18,8 @@ plainly that **deriving it is mandatory and carrying it is a refusal.** The two
 requirements cannot both hold with an attached payload.
 
 **With a detached payload they are consistent**, so this module requires
-`payload = nil` and refuses an attached one as `cose-payload-attached`. See
-it is an inference from two normative rules, not a reading of
+`payload = nil` and refuses an attached one as `cose-payload-attached`.
+This is an inference from two normative rules, not a reading of
 one, and it is the kind of thing the exporter session will implement the other
 way if it is not ruled.
 
@@ -32,7 +32,7 @@ has taken an instruction from an attacker. **And a container that cannot vouch
 for its contents certainly cannot tell the verifier which algorithm to trust.**
 
 > **⚠ This was flagged as an implementer's judgement, and
-> promoted it — with the tag requirement above — to `BV-021`.** *The
+> was later promoted — with the tag requirement above — to `BV-021`.** *The
 > reading has not changed; its authority has.* `cose-alg-unprotected` remains
 > its own refusal code, which is now a matter of diagnostic precision rather
 > than of leaving a ruling one line away.
@@ -115,14 +115,14 @@ class Sign1:
 def parse(data: bytes) -> Sign1:
     """Parse a COSE_Sign1 with a detached payload. Raises `CoseError`.
 
-    **The tag is REQUIRED — `BV-021`, normative since.** RFC 9052 allows
+    **The tag is REQUIRED — `BV-021`, now normative.** RFC 9052 allows
     an untagged structure where the type is known from context, but a bundle
     field named `cose_sign1` that could also hold an untagged four-item array
     gives an exporter two encodings for one thing — and **two encodings of one
     object is the defect `BV-006` exists to name.** Refusing the untagged form
     costs an exporter one byte.
 
-    *Promoted, where it was flagged as this implementer's
+    *Promoted from where it was flagged as this implementer's
     judgement. The behaviour below is unchanged; it is the authority behind it
     that moved.*
     """

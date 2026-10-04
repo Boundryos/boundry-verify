@@ -62,7 +62,7 @@ from __future__ import annotations
 # followed by a traceback and `FAILED (errors=1)`, exit 1 — which reads as a
 # broken package rather than a wrong interpreter. Measured, then fixed.
 #
-# > ***A REFUSAL A TEST RUNNER CAN CATCH BECOMES A TEST RESULT, AND IS
+# > ***A REFUSAL A TEST RUNNER CAN CATCH BECOMES A TEST RESULT, AND THAT IS
 # > EXACTLY THE COST OF A FLOOR BREACH ARRIVING AS A TEST RESULT.***
 #
 # The floor module is loaded BY PATH so that importing it does not execute
@@ -561,7 +561,7 @@ class TheDocuments(unittest.TestCase):
 # ─────────────────────────────────────────────────────────────────────────────
 # · EACH *Held by* NAME RESOLVES — read from the documents, checked here
 # ─────────────────────────────────────────────────────────────────────────────
-#: ⚠. The README says each *Held by* line names a check in
+#: ⚠ The README says each *Held by* line names a check in
 #: this run. Until these checks, that sentence was held by whoever read it.
 #: Each backticked name in a *Held by* paragraph, and each name after "held by
 #: the check" in `manifest.json`, must now resolve as one of seven kinds:
@@ -825,9 +825,9 @@ class WhatItRefuses(unittest.TestCase):
         self.assertEqual(codes, {"corpus-root-not-declared", "corpus-root-absent"})
 
     def test_UNSET_roots_mean_the_two_packaged_roots_and_nothing_else(self):
-        """the README's line on the default roots was held by
+        """The README's line on the default roots was held by
         a reader reading `corpus.allowed_roots`. This is that reading, run. Two
-        packaged roots since: the demo and the kit's evidence."""
+        packaged roots: the demo and the kit's evidence."""
         from boundry_connector import corpus
         before = os.environ.pop(corpus.ROOTS_ENV, None)
         try:
@@ -890,7 +890,7 @@ class WhatItRefuses(unittest.TestCase):
     # code the package can raise — a set it derives from the source.
 
 
-# ═══ · — WHAT A ROOT MAY HOLD, and the refusal by name ═══════════
+# ═══ WHAT A ROOT MAY HOLD, and the refusal by name ═══════════
 #
 # A measurement found a declared root holding a top-level JSON list answered by every tool with
 # `tool-failed-unexpectedly`. A root now holds records, kernel exports and three files named
@@ -960,7 +960,7 @@ class WhatARootMayHold(unittest.TestCase):
         self.assertEqual(_echoes(proc.stdout + proc.stderr, td, os.path.realpath(td)), [])
 
 
-# ═══ · — an export whose contents do not decode ═══════════════════════
+# ═══ an export whose contents do not decode ═══════════════════════
 #
 # A measurement found a kit export with correctly typed fields and a non-hex payload answering
 # `tool-failed-unexpectedly` from the kit's three tools. It now refuses the root by name.
@@ -1021,7 +1021,7 @@ class AnExportThatDoesNotDecode(unittest.TestCase):
         self.assertEqual(_echoes(proc.stdout + proc.stderr, td, os.path.realpath(td)), [])
 
 
-# ═══ · THE EVALUATION KIT, checked in the package ════════════════════════
+# ═══ THE EVALUATION KIT, checked in the package ════════════════════════
 #
 # The evidence in `kit_evidence/` came from real governed runs (`make_kit_evidence.py`, programme
 # side). These checks read it through the tools and hold each claim the README makes about it.
@@ -1127,7 +1127,7 @@ class TheEvaluationKit(unittest.TestCase):
 
 
 class ThePackagedRootsAreAddressableByNAME(unittest.TestCase):
-    """the two packaged roots answer to `kit` and `demo`, over the wire, with nothing set.
+    """The two packaged roots answer to `kit` and `demo`, over the wire, with nothing set.
 
     ⚠⚠ **THIS IS THE CHECK THAT WOULD HAVE CAUGHT IT.** Every shipped check before this one
     handed the tools a PATH it had computed itself, so every one of them passed while the package
@@ -1206,7 +1206,7 @@ class NoSigningKeyShips(unittest.TestCase):
                 self.assertRegex(value, r"^[0-9a-f]{64}$", key_id)
 
 
-# ═══ · THE BOUNDARY, ATTACKED —, ════════════════
+# ═══ THE BOUNDARY, ATTACKED ════════════════
 #
 # ⚠⚠ **WHY THESE EXIST**: *a check written by the author of
 # the boundary tests the boundary the author imagined.* The checks above test the
@@ -1268,7 +1268,7 @@ def _a_record(record_id):
 
 
 class TheBoundaryUnderAttack(unittest.TestCase):
-    """ (security): every file read resolves inside its declared root.
+    """Security: every file read resolves inside its declared root.
 
     **The rule, declared:** an entry is read only if its FINAL target lies inside
     the resolved declared root. A link that resolves INSIDE is admitted; one that
@@ -1327,7 +1327,7 @@ class TheBoundaryUnderAttack(unittest.TestCase):
             self.assertEqual(as_root.exception.code, "corpus-root-not-declared")
 
     def test_a_link_that_resolves_INSIDE_the_root_is_ADMITTED(self):
-        """The declared answer 's open question, and its control: the
+        """The declared answer to an open question, and its control: the
         rule is where a link LEADS, not that it is a link."""
         Corpus, _ = self._corpus()
         with tempfile.TemporaryDirectory() as td:
@@ -1444,7 +1444,7 @@ class TheBoundaryUnderAttack(unittest.TestCase):
         self.assertNotIn(str(td), json.dumps(linked))
 
 
-#: ⚠⚠ ** — THE PATHS A REFUSAL MUST NEVER RENDER.** Each is planted where a
+#: ⚠⚠ **THE PATHS A REFUSAL MUST NEVER RENDER.** Each is planted where a
 #: client, an operator or a record could put it, and each carries this token so
 #: an echo cannot hide behind a resolved or shortened spelling.
 _PLANTED = "a-clients-folder-name"
@@ -1477,7 +1477,7 @@ def _echoes(text: str, *places) -> list[str]:
 
 @NEEDS_SERVER
 class NoRefusalEchoesAPath(unittest.TestCase):
-    """ (privacy): EXP-006's rule at EVERY refusal site, not one."""
+    """Privacy: EXP-006's rule at EVERY refusal site, not one."""
 
     def _drive(self, td):
         """Trigger every refusal code with a path planted where a caller could
@@ -1575,7 +1575,7 @@ class NoRefusalEchoesAPath(unittest.TestCase):
 
     def test_a_refusal_never_echoes_the_path_you_named(self):
         """`EXP-006`, WIDENED to every refusal site the package can raise. The
-        old form of this check reached one branch; found another."""
+        old form of this check reached one branch; a later pass found another."""
         with tempfile.TemporaryDirectory() as td:
             got, cannot, place = self._drive(td)
         for code, rendered in sorted(got.items()):
@@ -1664,7 +1664,7 @@ class OneIdentity(unittest.TestCase):
 
     def test_honest_control_a_manifest_that_DISAGREES_is_seen_to(self):
         """The SAME comparison, over the SAME pipe, against a manifest carrying the
-        identity this package shipped with before: it must disagree."""
+        identity this package previously shipped with: it must disagree."""
         doc = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         doc["name"], doc["display_name"], doc["version"] = "boundry-connector", None, "0.1.0"
         with tempfile.TemporaryDirectory() as td:

@@ -43,15 +43,15 @@ __all__ = [
     "envelope_leaf_hash_v3",
 ]
 
-#: ⚠ **THE KEY THAT NAMES A VERSION, AND ITS HOME ON THIS ROAD** (
-#: ). It was a literal in `envelope_dispatch` AND a second,
+#: ⚠ **THE KEY THAT NAMES A VERSION, AND ITS HOME ON THIS ROAD.**
+#: It was a literal in `envelope_dispatch` AND a second,
 #: independent literal in `CEF_V3_KEYS` below, **so a move of one would not
 #: have moved the other.**
 #:
 #: It lives HERE and not in `envelope_dispatch` because `envelope_dispatch`
 #: imports this module and the reverse would be a cycle; and not in
 #: `envelope_form` because that module is derived from
-#: **alone** and v1 is identified by this
+#: the envelope-form specification **alone** and v1 is identified by this
 #: key's ABSENCE. **v3 is the first form on this road that carries it, which is
 #: the same answer the substrate road gives** — there `DISPATCH_KEY` lives in
 #: `canonical_envelope_v2`, the module of the first form to carry the key.

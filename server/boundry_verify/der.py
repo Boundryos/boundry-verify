@@ -122,7 +122,7 @@ _MUST_BE_PRIMITIVE = frozenset({
 #: Universal tag NUMBERS DER requires to be CONSTRUCTED — the base numbers, not
 #: the identifier octets.
 #:
-#: > **⚠ Repaired STOP-C, where the mutation campaign reported the
+#: > **⚠ Repaired at STOP-C, where the mutation campaign reported the
 #: > guard `INERT`.** It held `TAG_SEQUENCE` and `TAG_SET` — the full identifier
 #: > octets `0x30` and `0x31` — and was compared against `tag`. **Both of those
 #: > already carry the constructed bit, so `not constructed` could never be true
@@ -418,7 +418,7 @@ def oid(element: Element, where: str) -> str:
 def generalized_time(element: Element, where: str) -> str:
     """The GeneralizedTime, **syntax checked and VALUE NEVER JUDGED**.
 
-    > **⚠ ** *A verifier does not know what time it is in any
+    > **⚠** *A verifier does not know what time it is in any
     > sense a record can rely on, and a checker that rejects a token for being
     > too old has substituted its own clock for evidence.* **So this returns the
     > time as text and this module never compares it to anything.**

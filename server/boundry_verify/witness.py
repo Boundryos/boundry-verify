@@ -1,12 +1,12 @@
 """The witness trust list — STOP-C, and `D5-e` in full.
 
-**Built (amended ), `ERRATA_P3_02`
-and alone.** The kernel repository has not
+**Built from the verification-bundle specification (as amended), `ERRATA_P3_02`
+and the checkpoints-and-receipts specification alone.** The kernel repository has not
 been read.
 
 ## ⚠ Why this module exists at all, and why it was held back until now
 
- recorded the STOP-B result exactly: **an internally perfect self-minted
+A ruling recorded the STOP-B result exactly: **an internally perfect self-minted
 bundle returned `UNATTESTED` because `witness_keys` was never read — the right
 answer for the wrong reason. Correct by omission is not a property.**
 
@@ -40,13 +40,13 @@ for the verification would have moved the disagreement rather than removed it.*
 *`BV-019` keeps every checker provisioned; a module that mentions one is one
 edit away from registering it.*
 
-## ⚠ — the token is opaque, so `ATTESTED` needs more than an anchor
+## ⚠ The token is opaque, so `ATTESTED` needs more than an anchor
 
 `ERR-P3-005` carries `witness_token` **"verbatim and deliberately opaque to
 Boundry"** — a DER `TimeStampToken`, a Rekor entry. **So section 12 step 7,
 *"verify each receipt under an anchored witness key"*, is NOT executable for
 either named `witness_kind` without implementing that witness's own format**,
-which already placed outside this pack.
+which an earlier ruling already placed outside this pack.
 
 **Anchoring is therefore necessary and not sufficient.** `token_verifiers` is a
 second provisioned input, `witness_kind` to a checker, with **no default and no
@@ -105,8 +105,8 @@ REASONS = (
 )
 
 # ---------------------------------------------------------------------------
-# ⚠ `BV-028`'s OPERATIONAL BOUNDARY — the class of a refusal, added at
-# /.
+# ⚠ `BV-028`'s OPERATIONAL BOUNDARY — the class of a refusal, added
+# later.
 #
 # > *"A token checker returning ONE BOOLEAN CANNOT BE CONFORMANT WITH THIS
 # > CLAUSE. When it refuses, the refusal is either THE TOKEN IS WRONG ... or WE
@@ -123,7 +123,7 @@ REASONS = (
 #: The token verified. **`True` is still accepted for this and only this**: the
 #: clause constrains a REFUSAL, and a bare `True` carries no ambiguity to
 #: resolve. *Widening the boundary past the clause would be minting
-#: specification, which is the thing declined to do.*
+#: specification, which is the thing the ruling declined to do.*
 TOKEN_VERIFIED = "token-verified"
 
 #: *The token is wrong.* Evidence was supplied and it failed — an imprint over
@@ -176,7 +176,7 @@ SPECIFICATION_FINDING = (
 #:
 #: It returns **a member of `TOKEN_CLASSES`, or `(class, findings)` where
 #: `findings` is a SEQUENCE of strings** — things the checker LEARNED and is
-#: reporting without judging. *(The class is
+#: reporting without judging. *(The class was added
 #: under `BV-028`'s operational boundary.)*
 #:
 #: **`True` and `(True, findings)` remain accepted and mean `TOKEN_VERIFIED`.**
@@ -223,7 +223,7 @@ def _classify(head) -> str:
 
 
 def _normalise(result) -> tuple[str, tuple[str, ...]]:
-    """A checker's return, in the two shapes admits and no others.
+    """A checker's return, in the two shapes a ruling admits and no others.
 
     **The head is now a CLASS rather than a bool**. The second
     shape is unchanged and the findings channel is untouched: it still carries
@@ -279,7 +279,7 @@ class Anchor:
     #: ⚠ `WIT-001` v2's observation grade — `submission` | `observation`.
     #:
     #: CARRIED HERE AND NOT ON THE RECEIPT, and the reason is the same one
-    #: The reason given for custody: `ERR-P3-005`'s five entries are CLOSED, and a
+    #: given for custody: `ERR-P3-005`'s five entries are CLOSED, and a
     #: grade is a property of the WITNESSING ARRANGEMENT — how this witness gets
     #: its checkpoints — not of an individual observation. Two receipts from one
     #: witness cannot disagree about it.
@@ -327,7 +327,7 @@ SUBMISSION = "submission"
 OBSERVATION = "observation"
 OBSERVATION_GRADES = (SUBMISSION, OBSERVATION)
 
-#: ⚠ THE REGISTERED LEGACY SET (`KD-013`'s migration pattern, ).
+#: ⚠ THE REGISTERED LEGACY SET (`KD-013`'s migration pattern).
 #:
 #: Anchors that predate the custody record are recognised BY REGISTERED DIGEST OF
 #: THE ARTEFACT THAT CARRIES THEM, never by re-deriving from an editable copy —
@@ -335,7 +335,7 @@ OBSERVATION_GRADES = (SUBMISSION, OBSERVATION)
 #: and cannot be edited to add the fields. A digest is the one handle that does
 #: not require touching it.
 #:
-#: `INTEROP/oob/witness_trust_list.json`, 530 bytes, carrying
+#: Measured: `INTEROP/oob/witness_trust_list.json`, 530 bytes, carrying
 #: exactly one anchor (`synthetic://tsa/exp-1`).
 LEGACY_TRUST_LIST_DIGESTS = {
     "8f04f3b64cf187aeda6c5896698e2dbd5f091002da957b3d323ee2ead9453c53":
@@ -360,7 +360,7 @@ def continuity_report(stream) -> dict:
     ⚠ **THIS DELIBERATELY DOES NOT DO WHAT `WIT-001` v3 LIMB 1 ASKS.**
 
     Limb 1 says *"a stream containing ordinals N and N+3 is itself the evidence
-    that two checkpoints existed unobserved."* **false.**
+    that two checkpoints existed unobserved."* **Measured: false.**
     `CP-012` makes `ledger_ordinal` the **number of leaves** — the tree size —
     not a checkpoint sequence number, and `CP-017` requires only that it be
     **non-decreasing**. A ledger checkpointed at sizes 10, 25 and 60 produces
@@ -382,7 +382,7 @@ def continuity_report(stream) -> dict:
       * `era_crossed` — ⚠ the stream crosses an era boundary, and **every
         continuity claim stops at that line**. `CP-017` scopes monotonicity
         *within an era and construction*; `detect_equivocation` returns `None`
-        across eras BY DESIGN.: an era boundary defeats
+        across eras BY DESIGN. Measured: an era boundary defeats
         continuity, cadence and equivocation simultaneously, and `era` is a field
         the OPERATOR chooses and signs.
       * `gaps` — reported as a FACT with no verdict attached, because the reader
@@ -430,7 +430,7 @@ CONSISTENCY_PROOF_WITHHELD = "pair-proof-withheld-attested"
 #: `head_construction_id` and `checkpoint_version` are in the
 #: stream, GOVERN whether running the check means anything, and are NOT arguments
 #: to `verify_consistency` — measured by introspecting its real signature, which
-#: takes five parameters and neither of these. 's instrument gated on `era`
+#: takes five parameters and neither of these. An earlier instrument gated on `era`
 #: alone while `checkpoint.py`'s equivocation detector, in this same package,
 #: already gated on era AND construction (`CP-017` says "same era and
 #: construction"). The gap was mine, not the specification's.
@@ -440,7 +440,7 @@ CONSISTENCY_VERSION_DIFFERS = "pair-crosses-checkpoint-version"
 
 
 def _observation(item) -> dict:
-    """Accept 's 4-tuple or 's published-proof mapping.
+    """Accept the 4-tuple or the published-proof mapping.
 
     The 4-tuple `(ledger_ordinal, head_hash, era, proof)` is carried unchanged so
     every vector keeps running as written — it states no construction and
@@ -479,30 +479,30 @@ def consistency_over_stream(stream, verify=None, constructions=None) -> list[dic
 
     `stream` is ordered oldest-first. Each item is either
 
-      * 's tuple `(ledger_ordinal, head_hash_bytes, era, proof_or_None)`, or
-      * 's **published-proof mapping** with the `CP-011` field names —
+      * the tuple `(ledger_ordinal, head_hash_bytes, era, proof_or_None)`, or
+      * the **published-proof mapping** with the `CP-011` field names —
         `ledger_ordinal`, `head_hash`, `era`, `head_construction_id`,
         `checkpoint_version` — plus `proof` and `proof_withheld_attested`, or
-      * 's **`WIT-005` entry** — the declared carrier, recognised by
+      * the **`WIT-005` entry** — the declared carrier, recognised by
         carrying both `statement` and `proof_status`. The three forms are told
         apart by SHAPE and never by a flag a caller passes.
 
-    ## What found, and what `v0.6` repaired
+    ## What a measurement found, and what `v0.6` repaired
 
     `WIT-001` v4 limb 1 promised *"Any reader re-runs the same verification from
-    the stream."* ** measured that false**: `CP-019` needs a proof, and
+    the stream."* **A measurement found that false**: `CP-019` needs a proof, and
     `CP-011`'s body is a CLOSED SIX-FIELD set — `checkpoint_version`,
     `ledger_ordinal`, `head_hash`, `head_construction_id`, `era`, `kernel_time` —
     which does not contain one. `v0.6` §1 limb 1 repairs it by PUBLISHING the
     proof beside the countersigned statement.
 
-    ** re-measured the repair against `verify_consistency`'s real signature,
+    **The repair was re-measured against `verify_consistency`'s real signature,
     introspected rather than read: five parameters, `old_size`, `new_size`,
     `old_root`, `new_root`, `proof`. Every one is now sourced from the stream —
     the two sizes from `ledger_ordinal` (`CP-012`: the ordinal IS the tree size),
     the two roots from `head_hash`, and the proof from `v0.6`'s repair. ZERO
     arguments remain unsourced. The stream is argument-sufficient, and a proof is
-    self-verifying whoever supplied it — proved that by handing the
+    self-verifying whoever supplied it — a measurement proved that by handing the
     same bytes over from a hostile provenance and watching them verify, with four
     mutations refused and a wrong-root control refused.**
 
@@ -510,7 +510,7 @@ def consistency_over_stream(stream, verify=None, constructions=None) -> list[dic
     THIS FUNCTION.** Two of the six fields — `head_construction_id` and
     `checkpoint_version` — decide whether running the walk MEANS anything, and
     neither is a parameter, so nothing forces a caller to consult them.
-    's version consulted neither. They are gated below.
+    The earlier version consulted neither. They are gated below.
 
     ## The outcomes, and why none of them is silence
 
@@ -533,7 +533,7 @@ def consistency_over_stream(stream, verify=None, constructions=None) -> list[dic
       and a dropped packet both land here, and neither is an act anyone signed
       for.
 
-    ⚠ ** measured what the marks are worth and the answer is not
+    ⚠ **A measurement showed what the marks are worth and the answer is not
     flattering: exactly ONE pair is marked per rewrite, and raising the witness's
     cadence from 3 pairs to 29 did not raise that count above one.** The mark is
     real, it localises the rewrite to one interval, and it does not grow with the
@@ -749,11 +749,11 @@ def verify_token(anchor: Anchor, *, witness_kind: str, token: bytes,
     Returns `(result, reason)` where `result` is one of `RESULTS` and the head
     of `reason` is one of `REASONS`.
 
-    **⚠ THE FIRST VALUE WAS A `bool` UNTIL ** A bool could carry
+    **⚠ THE FIRST VALUE WAS ONCE A `bool`.** A bool could carry
     *verified* against *not verified* and nothing else, so the two epistemically
     opposite refusals — the token failed, and this build could not try — arrived
     at the caller indistinguishable and landed together on `REFUTED`. That was
-and `BV-028`'s operational boundary is the ruling on it: **the class
+    the defect, and `BV-028`'s operational boundary is the ruling on it: **the class
     of a refusal is part of the contract, and the contract is part of the
     specification** (`BV-024`).
 

@@ -5,7 +5,7 @@
 ⚠ **STDIO ONLY, ENFORCED IN CODE AND NOT ONLY IN PROSE.** The specification says a
 remote connector is a Phase 7 event, and it states the directory-submission
 gate in a sentence. **A sentence is one config line away from being ignored**
-(/: a declaration enforces nothing; enforcement lives on the
+(a declaration enforces nothing; enforcement lives on the
 path). So this module imports no networking library at all, and `main()`
 REFUSES to start if it is handed any argument that looks like a transport,
 host or port. `test_connector_cx001.py` asserts the absence of every socket
@@ -49,7 +49,7 @@ has only ever returned "clean" has not detected anything.
 > ***A CLAIM MADE TRUE BY NAMING THE PATH IS ONE A READER CAN RE-MEASURE. A
 > CLAIM MADE TRUE BY SOFTENING THE WORDS IS ONE THEY MUST TAKE ON TRUST.***
 
-⚠ put removing this dependency out of scope, and the sentence that
+⚠ Removing this dependency was put out of scope, and the sentence that
 sat here said so. The relocation removed it as a CONSEQUENCE, not as its
 purpose: the purpose was to let a verifier with no model layer READ the tenant
 rule. The dependency going is the same fact seen from the other end.
@@ -98,7 +98,7 @@ from boundry_verify.interpreter_floor import assert_floor as _assert_floor
 
 _assert_floor()
 
-# ⚠: the floor as two integers, for the sentence below. It is the SAME
+# ⚠ The floor as two integers, for the sentence below. It is the SAME
 # declaration the guard above enforces and the manifest states, so the requirement a
 # reader acts on cannot drift from the one that refuses them.
 from boundry_verify.floor import MAJOR as _PY_MAJOR, MINOR as _PY_MINOR
@@ -110,7 +110,7 @@ import sys
 from typing import Any
 
 from boundry_connector import TOOL_NAMES
-# ⚠: the instructions carry the corpus_dir sentence, DERIVED from the one place the two
+# ⚠ The instructions carry the corpus_dir sentence, DERIVED from the one place the two
 # packaged labels are declared. A model reads this before it reads any schema.
 from boundry_connector.corpus import CORPUS_DIR_WORDING as _CORPUS_DIR_WORDING
 from boundry_connector import CONNECTOR_DISPLAY_NAME, CONNECTOR_NAME, CONNECTOR_VERSION
@@ -121,7 +121,7 @@ __all__ = ["PROTOCOL_VERSION", "SERVER_INFO", "handle", "main",
 
 PROTOCOL_VERSION = "2024-11-05"
 
-#: ⚠: DERIVED from `boundry_connector.CONNECTOR_NAME` / `CONNECTOR_VERSION`,
+#: ⚠ DERIVED from `boundry_connector.CONNECTOR_NAME` / `CONNECTOR_VERSION`,
 #: the one declaration `manifest.json` is also written from.
 SERVER_INFO = {
     "name": CONNECTOR_NAME,
@@ -209,8 +209,8 @@ as data so the function and this sentence must move together — and it writes
         })
     if request_id is None:
         return None
-    # ⚠: the method name is client-supplied and was echoed verbatim — a
-    # planted path came back in the protocol error ( `DEVB-10`).
+    # ⚠ The method name is client-supplied and was echoed verbatim — a
+    # planted path came back in the protocol error (`DEVB-10`).
     return _error(request_id, -32601,
                   "method not found (the name is not echoed: this server never "
                   "renders client-supplied text in a refusal)")

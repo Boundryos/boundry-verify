@@ -1,7 +1,7 @@
 {
   "name": "boundry-verify",
   "displayName": "Boundry Verify",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "The Boundry Substrate decides whether a request may run, executes it deterministically, and signs a record of both; this connector checks those records on your machine.",
   "author": {
     "name": "Boundry",

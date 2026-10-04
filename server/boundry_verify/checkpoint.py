@@ -1,20 +1,20 @@
-"""Checkpoints, alone.
+"""Checkpoints, from the checkpoints-and-receipts specification alone.
 
-⚠ **WHAT THIS MODULE HAS ACTUALLY SEEN, STATED EXACTLY** ( (d),
-correcting the line it replaces).
+⚠ **WHAT THIS MODULE HAS ACTUALLY SEEN, STATED EXACTLY**
+(correcting the line it replaces).
 
   * It VERIFIES checkpoints. It emits none and signs none.
   * Canon's vectors exercise it on SYNTHETIC material, and that remains the bulk
     of what it has met.
   * ⚠ **ONE REAL CHECKPOINT HAS PASSED THROUGH IT** — signed by a real Ed25519
-    key over a real twelve-leaf ledger part 1, and verified from
+    key over a real twelve-leaf ledger in a measured run, and verified from
     a directory holding no private key.
   * **NOTHING HAS BEEN INDEPENDENTLY WITNESSED.** No party other than the
     operator has seen any head this module has checked, so every witness rung it
     has reported is `UNATTESTED`.
 
 ⚠ **THE LINE THIS REPLACES SAID "Every checkpoint this module handles is
-synthetic test material", AND PART 1 MADE THAT UNTRUE.** It was
+synthetic test material", AND THAT RUN MADE THAT UNTRUE.** It was
 true when it was written and stopped being true without anyone editing it.
 
 > ***A STATUS LINE IS A CLAIM LIKE ANY OTHER, AND THE ONE THING IT CANNOT DO IS
@@ -181,7 +181,7 @@ def verify_checkpoint(statement: CheckpointStatement, signature: bytes,
     fact about cryptography, involving no assertion by anybody.
     `assert_era_entitled_to_time` answers *was this key entitled to that
     instant* — a fact about two declarations agreeing. Fusing them would let a
-    `False` mean either, and 's lesson runs the other way here: what is
+    `False` mean either, and the earlier lesson runs the other way here: what is
     made structural is that the ENTRY POINT asks both, not that the two
     questions become one.
 
@@ -200,7 +200,7 @@ def witness_message(statement: CheckpointStatement) -> bytes:
     it closes the gap where §8 step 6 said "verify the receipt" without saying
     over what.
 
-    `ERR-P3-007` —, RULED: the attested value is the **raw 32
+    `ERR-P3-007` — RULED: the attested value is the **raw 32
     bytes** of the SHA-256, never its 64-character hexadecimal text. Hex appears
     only where a value is carried inside a canonical-form document
     (`attested_digest`); what a verifier checks a signature over is the binary

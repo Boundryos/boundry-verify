@@ -1,6 +1,6 @@
 Why it exists: Boundry takes execution out of the model's hands. The Boundry Substrate decides whether a request may run, executes it deterministically, and signs a record of both; this connector checks those records on your machine. Overview: https://verify.boundry.tech/
 
-> **This repository is the Boundry Verify plugin (Cowork and Claude Code) and holds its source.** For Claude Desktop's ordinary chat, or to read your own folders, download `boundry-verify-0.3.1.mcpb` from [Releases](https://github.com/Boundryos/boundry-verify/releases) and open it with Claude Desktop; the `.mcpb` holds the same server. Documentation: https://verify.boundry.tech/ · Privacy: https://verify.boundry.tech/privacy/ · Contact: verify@boundry.tech
+> **This repository is the Boundry Verify plugin (Cowork and Claude Code) and holds its source.** For Claude Desktop's ordinary chat, or to read your own folders, download `boundry-verify-0.3.2.mcpb` from [Releases](https://github.com/Boundryos/boundry-verify/releases) and open it with Claude Desktop; the `.mcpb` holds the same server. Documentation: https://verify.boundry.tech/ · Privacy: https://verify.boundry.tech/privacy/ · Contact: verify@boundry.tech
 
 # Boundry Verify — a local, read-only connector over sealed records
 
@@ -8,7 +8,7 @@ Why it exists: Boundry takes execution out of the model's hands. The Boundry Sub
 
 1. **Have Python 3.12 or newer** (see below: the Python that ships with macOS is older, and the
    package refuses under it).
-2. **Download `boundry-verify-0.3.1.mcpb`** from Releases and double-click it. Claude Desktop
+2. **Download `boundry-verify-0.3.2.mcpb`** from Releases and double-click it. Claude Desktop
    opens the install screen.
 3. **Leave "Folders the connector may read" EMPTY.** Empty means the two packaged synthetic
    folders, `kit` (the evaluation kit) and `demo` (the demonstration records), and nothing else.
@@ -28,7 +28,7 @@ Why it exists: Boundry takes execution out of the model's hands. The Boundry Sub
 
 If `kit` or `demo` is refused with `corpus-root-not-declared` while the field is empty, the
 extension installed is 0.3.0, which read an empty field as a declared folder. Remove it and
-install 0.3.1.
+install 0.3.2.
 *Held by:* `an_UNFILLED_host_placeholder_means_the_packaged_roots`,
 `whitespace_only_roots_mean_the_packaged_roots`,
 `a_placeholder_beside_a_real_root_is_ignored_and_the_real_root_REPLACES_the_packaged_ones` and
@@ -319,7 +319,7 @@ from the source so a refusal added later cannot escape it; with the control
 ### One name, one version
 
 On `initialize` the server announces **`boundry-verify`**, titled **Boundry Verify**,
-version **`0.3.1-stage1`** — the same name, display name and version `manifest.json`
+version **`0.3.2-stage1`** — the same name, display name and version `manifest.json`
 carries. All three come from one declaration in `boundry_connector/__init__.py`, and
 the version is built from the package's stage, so the handshake cannot claim a stage
 it is not running. **`stage1` means this stage reads and verifies**: there is no write
@@ -368,6 +368,10 @@ This document does not say *tamper-proof*, *immutable*, *guaranteed*, or
 *Held by:* the check `no_document_makes_a_claim_the_code_does_not_hold`, which
 reads this document with the block above removed, so a denial is not mistaken
 for a claim.
+
+## Related
+
+Research notes and a preprint on the design, threat model and evaluation are at [github.com/Boundryos/research](https://github.com/Boundryos/research) (DOI: [10.5281/zenodo.23129907](https://doi.org/10.5281/zenodo.23129907)). They describe capabilities beyond this plugin; their claims table gives each one's status. This plugin only verifies records.
 
 ## Privacy policy, and who to contact
 

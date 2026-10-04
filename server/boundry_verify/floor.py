@@ -31,7 +31,7 @@ declaration that looked at the interpreter would be a floor that moved with the
 machine.
 """
 # ─── CHANGE LEDGER ─────────────────────────────────────────────────────────
-#   22 Sep 2026 ·. Created,
+#   22 Sep 2026 · Created,
 #                 moving the declaration out of the connector's `manifest.json`.
 
 #: ⚠ **THE FLOOR, AND IT IS DECLARED NOWHERE ELSE.** Raising it is a decision

@@ -34,11 +34,11 @@ any other identifier hits `tst-signature-algorithm-unsupported`.
 
 ⚠⚠ **THIS PARAGRAPH SAID "Ed25519 ONLY" AND SAID COMMERCIAL AUTHORITIES
 "overwhelmingly sign with RSA or ECDSA".** The first became false at
- landings A and B. The second was a claim about a population this
+landings A and B. The second was a claim about a population this
 programme has never measured, and it is simply dropped: **the admitted set is
 a fact this module can state, and a prevalence claim is not.** *What WAS
 measured: OpenSSL's own TSA emits `rsaEncryption`, which the set
- did not admit.* *That is a limitation of this pack, not
+did not admit.* *That is a limitation of this pack, not
 a finding against the token, and the refusal says so* — because a checker that
 reported "does not verify" for a token it never attempted would invert
 `ERR-P3-008` inside a single function.
@@ -50,7 +50,7 @@ from parsed values would make the signature depend on this module's encoder
 rather than on the signer's bytes* — `ERR-P3-005`'s reasoning, one layer down.
 
 **5 · ⚠ THE `SignerInfo` DIGEST ALGORITHM IS READ FROM THE TOKEN, NOT REQUIRED
-OF IT — REPAIRED ** *Until this pack the parser refused any
+OF IT — REPAIRED.** *Until this pack the parser refused any
 `digestAlgorithm` that was not `id-sha256`, and that refusal was a defect.*
 
 **RFC 5652 §5.3 makes `digestAlgorithm` the algorithm THE SIGNER USED**, and
@@ -66,11 +66,10 @@ this programme ATTESTS UNDER as SHA-256; the CMS `digestAlgorithm` is what the
 SIGNATURE is computed under. ***Two different digests doing two different jobs,
 and assuming they must match is exactly the assumption this repair removes.***
 
-**The set below is DECLARED**, — a published fact about this
+**The set below is DECLARED** — a published fact about this
 build, taken from RFC 5754 §2's four SHA-2 identifiers, **not from any token.**
 
-## ⚠ 6 · THE ESS SIGNING-CERTIFICATE ATTRIBUTE IS REQUIRED — `BV-029`,
-##
+## ⚠ 6 · THE ESS SIGNING-CERTIFICATE ATTRIBUTE IS REQUIRED — `BV-029`
 
 **RFC 3161 §2.4.1 requires a `TimeStampToken` to identify the certificate the
 TSA signed under.** Until this pack **this checker did not require it and
@@ -125,7 +124,7 @@ ID_ATTR_SIGNING_CERTIFICATE_V2 = "1.2.840.113549.1.9.16.2.47"
 #: syntax is defined as a `SET OF AttributeValue`*. **So a `content-type`,
 #: `message-digest` or `signing-time` attribute carrying any other number of
 #: values is a defect IN THE TOKEN**, and a multi-valued attribute CMS does not
-#: so constrain is **THIS BUILD being short**. *:
+#: so constrain is **THIS BUILD being short**. *Ruled:
 #: one refusal code was covering both classes — which is precisely the defect
 #: `rfc3161-token-malformed` was split to remove, reproduced one level down in
 #: the code that replaced it.*
@@ -167,8 +166,8 @@ ESS_SIGNING_CERTIFICATE_ATTRS = {
     ID_ATTR_SIGNING_CERTIFICATE_V2:
         "signingCertificateV2 (RFC 5035 section 3)",
 }
-#: `ERR-P3-004`'s digest, and the ONLY thing this constant governs after
-#: The `messageImprint`'s `hashAlgorithm`. **It is no longer the
+#: `ERR-P3-004`'s digest, and the ONLY thing this constant governs now:
+#: the `messageImprint`'s `hashAlgorithm`. **It is no longer the
 #: CMS `digestAlgorithm` gate** -- see `DIGEST_ALGORITHMS`.
 ID_SHA256 = "2.16.840.1.101.3.4.2.1"
 #: RFC 5754 §2's other three SHA-2 identifiers.
@@ -183,7 +182,7 @@ ID_ED25519 = "1.3.101.112"
 #: ⚠⚠ **Landing A.** RSASSA-PKCS1-v1_5 with SHA-2, RFC 8017
 #: A.2.4. ⚠⚠ **THIS COMMENT CLAIMED COMMERCIAL AUTHORITIES "overwhelmingly
 #: sign with these".** That is a claim about a population this programme has
-#: never measured, and measured the one implementation it had to hand:
+#: never measured; the one implementation to hand was measured:
 #: **OpenSSL's TSA signs with `rsaEncryption`, not with these**, and `openssl
 #: ts` has no setting that changes it. The claim is dropped rather than
 #: restated. These three identifiers are admitted; `ID_RSA_ENCRYPTION` below
@@ -337,7 +336,7 @@ REFUSALS = (
     # as against `not-permitted` above, which a standard requires.
     "tst-digest-algorithm-pairing-declined",
     "tst-signature-algorithm-unsupported",
-    # ⚠ landing B. RFC 3370 §3.2 fixes `rsaEncryption`'s
+    # ⚠ Landing B. RFC 3370 §3.2 fixes `rsaEncryption`'s
     # parameters at NULL; RFC 5754 §2's accept-both licence is about SHA-2
     # DIGEST identifiers, not this one. A parameters field that is neither NULL
     # nor absent is the TOKEN's defect.
@@ -436,7 +435,7 @@ def _from_der_error(exc, where: str, limits=None) -> "Rfc3161Error":
     `tst-structure`.**
 
     > ⚠ **WHY THIS KEYS ON THE CODE AND NOT ON THE SITE, MEASURED RATHER THAN
-    > ASSUMED.** describes *"three bound-related `tst-structure`
+    > ASSUMED.** An order describes *"three bound-related `tst-structure`
     > sites"*. **There are three bound-related der CODES and they reach TWO
     > different raise sites** — the top-level `der.parse` in `parse_token`, and
     > the inner `der.parse` of the `eContent` in `_parse_tst_info`, which fires
@@ -521,7 +520,7 @@ def _algorithm_id_full(element, where: str) -> tuple[str, bool]:
 def _algorithm_id_params(element, where: str) -> tuple[str, bool, bool]:
     """The identifier, whether parameters are present, **and whether NULL.**
 
-    ⚠ landing B. `_algorithm_id_full` above reports only
+    ⚠ Landing B. `_algorithm_id_full` above reports only
     PRESENCE, because the policy it documents is about absent-versus-NULL,
     where RFC 8419 §3.1 and RFC 5754 §2 disagree and this reader accepts both.
     **RFC 3370 §3.2 leaves no such room for `rsaEncryption`: its parameters are
@@ -660,7 +659,7 @@ def _parse_signed_attrs(element) -> tuple[bytes, str, bytes]:
                           lambda: der.oid(children[0], "attribute.attrType"))
         values = children[1]
         if values.tag != der.TAG_SET:
-            # ⚠, SPLIT HERE. **THE TOKEN IS WRONG.** RFC 5652 section 5.3
+            # ⚠ SPLIT HERE. **THE TOKEN IS WRONG.** RFC 5652 section 5.3
             # defines `Attribute.attrValues` as `SET OF AttributeValue`; a
             # `SignedAttribute` whose values field carries any other tag is
             # malformed on its face, and NOTHING about it is a limit of this
@@ -680,7 +679,7 @@ def _parse_signed_attrs(element) -> tuple[bytes, str, bytes]:
                 "a SET OF AttributeValue, so this is malformed on its face. The "
                 "TOKEN is wrong; this is not a limit of this checker")
         if len(values.children) != 1:
-            # ⚠, SPLIT Until now one code covered both
+            # ⚠ SPLIT. Until now one code covered both
             # classes: an attribute the standard PINS to one value and one it
             # leaves open. **The first is the token's defect, the second is our
             # limit**, and `BV-028` turns on exactly that line -- a caller

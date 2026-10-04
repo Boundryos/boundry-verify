@@ -1,6 +1,6 @@
 """The floor GUARD — reads the declaration in `floor.py`, refuses below it.
 
- (method) as corrected (source).
+The method as first ordered; the source as later corrected.
 
 ⚠ **THE FINDING THIS EXISTS FOR, AND IT IS NOT THAT THINGS CRASH.** The floor
 was declared and nothing enforced it, so a cold start was run on Python 3.9.6 —
@@ -14,7 +14,7 @@ the only trace.
 
 ## The declaration is in this package, not in the connector's manifest
 
-'s guard read `manifest.json`. The method was adopted and the
+The first guard read `manifest.json`. The method was adopted and the
 source was ruled wrong: **the independent verifier must not need the
 connector's packaging file to start.** `floor.py` holds the declaration;
 `make_manifest.py` derives the manifest's `compatibility.runtimes.python` from

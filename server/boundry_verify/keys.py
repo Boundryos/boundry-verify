@@ -1,4 +1,4 @@
-"""The verifying key directory, alone.
+"""The verifying key directory, from the key-directory specification alone.
 
 The directory is how a verifier obtains a key WITHOUT asking the operator —
 "since a verifier who must ask us has not verified anything independently".
@@ -42,7 +42,7 @@ CURRENT, RETIRED, COMPROMISED = "current", "retired", "compromised"
 #
 # `ERR-P4-002`: an implementation that cannot answer SAYS SO.
 
-#: The fields 's table requires of every
+#: The fields the specification's table requires of every
 #: entry. `valid_until` is NOT among them — §2 reads *"absent while the era is
 #: current"*, so its absence is a state, never a fault.
 REQUIRED_ERA_FIELDS = ("era", "algorithm", "public_key", "valid_from", "status")
@@ -79,19 +79,19 @@ SHAPE_REFUSALS = (
 SUCCESSION_FORM_ID = "kd-succession-cf1"
 
 #: What `kd-succession-cf1` denotes, exactly:
-#:   * covered bytes = applied to the statement
+#:   * covered bytes = the canonical form applied to the statement
 #:     mapping BELOW, whole, with no field omitted and none added;
 #:   * `*_verifying_key_sha256` = SHA-256 over the RAW 32-BYTE Ed25519 key.
 #:
 #: ⚠ THE RAW KEY, NOT THE PEM, AND THE CHOICE IS MEASURED RATHER THAN INHERITED.
-#: 's succession statement digests the key's PEM TEXT. PEM is a CONTAINER,
+#: An earlier succession statement digests the key's PEM TEXT. PEM is a CONTAINER,
 #: not a key format: the same key re-wrapped digests
-#: differently, and -- decisively -- a entry does not
+#: differently, and -- decisively -- a key-directory entry does not
 #: carry a PEM at all. Its `public_key` is base64 DER. So a statement bound to
 #: PEM text CANNOT BE CHECKED against the directory it is supposed to be part
 #: of; the binding names bytes the format does not hold.
 #:
-#: Consequence, stated plainly: 's succession SIGNATURE is valid
+#: Consequence, stated plainly: that succession SIGNATURE is valid
 #: and reproducible, but its key-binding fields are over the wrong encoding, so
 #: the succession STATEMENT must be re-emitted under this form. The chain's
 #: records and checkpoints are untouched by that.
@@ -118,14 +118,14 @@ class KeyDirectoryError(Exception):
 def parse_public_key(pem: str, *, allow_legacy: bool = False) -> bytes:
     """Return the raw 32-byte Ed25519 verifying key from `public_key`.
 
-    ⚠ — ACCEPTED, not yet fixed: §2 says `public_key` is
+    ⚠ ACCEPTED, not yet fixed: §2 says `public_key` is
     "PEM-encoded" and says nothing more. PEM is a container, not a key format —
     the body could be an RFC 8410 SubjectPublicKeyInfo, a bare 32-byte key, or
     something else, and a verifier that guesses wrong fails on every signature.
     `ERRATA_P3_02` accepted the finding and deferred the fix. ⚠ THE DEFERRAL IS
     SPENT AND THIS SENTENCE OUTLIVED IT: the fix was made and the
     encoding is declared at `KD-011`
-    with `KD-010`. Corrected
+    with `KD-010`.
     DATE: closed.
     *A deferral that is never retired reads as an open item for as long as it
     sits there, and this one advertised a gap the programme had already shut.*
@@ -139,7 +139,7 @@ def parse_public_key(pem: str, *, allow_legacy: bool = False) -> bytes:
         raise KeyDirectoryError("public_key must be a string")
 
     # ── KD-010 (DRAFT): A HASH OF A KEY IS NOT A KEY ─────────
-    # 's key directory carried `verifying_key_sha256` where the format
+    # An earlier key directory carried `verifying_key_sha256` where the format
     # wants `public_key`. Its era-2 entry held a 64-character hex digest and
     # NOTHING ELSE -- the key was never recorded and is unrecoverable.
     #
@@ -178,9 +178,9 @@ def parse_public_key(pem: str, *, allow_legacy: bool = False) -> bytes:
         # place): A 32-BYTE VALUE THAT IS NOT A KEY IS INDISTINGUISHABLE FROM
         # ONE THAT IS. A SHA-256 digest is exactly 32 bytes, so a digest
         # base64'd into this slot is accepted here and fails later as a
-        # signature mismatch --, not reasoned about.
+        # signature mismatch -- measured, not reasoned about.
         #
-        # ⚠ left this accepted because the specification said only
+        # ⚠ An earlier pass left this accepted because the specification said only
         # "PEM-encoded" -- a container -- so a bare 32-byte body was neither
         # clearly conforming nor clearly not. KD-011 names the encoding, so the
         # question is now answerable and the answer is no.
@@ -266,15 +266,15 @@ class EraKey:
         self.valid_until = entry.get("valid_until")   # absent while current
         self.status = entry["status"]
 
-        # ── KD-012 (DRAFT), ───────────────────────────────────
-        # :27 reads, verbatim:
+        # ── KD-012 (DRAFT) ───────────────────────────────────
+        # The key-directory specification reads, verbatim:
         #     | `valid_from` | the first instant records were signed under this era |
-        # "Instant" names no encoding.: this field accepted an
+        # "Instant" names no encoding, and this field accepted an
         # int, 0, an ISO-8601 string, a float and None -- and KD-002's overlap
         # check then died of a bare TypeError comparing str with int.
         #
         # KD-012 names it: INTEGER MICROSECONDS SINCE THE UNIX EPOCH, the same
-        # construction:37 already names for
+        # construction the checkpoints-and-receipts specification already names for
         # `kernel_time` ("integer ... microseconds since epoch"). Refused here,
         # BY NAME, so the comparison KD-002 makes is always well-defined.
         for field, value in (("valid_from", self.valid_from),
@@ -294,7 +294,7 @@ class EraKey:
         # ── KD-011 limb 4, AS AMENDED ───────────────────────────────
         # ⚠ The flag as I drafted it re-opened the hole limb 2 exists to close:
         # it accepted "a bare 32-byte body", and a base64'd SHA-256 digest IS a
-        # bare 32-byte body -- so 's own artefact would have passed through
+        # bare 32-byte body -- so the earlier artefact would have passed through
         # the migration path.
         #
         # THE FLAG DOES NOT GRANT TRUST, IT REQUESTS A DIFFERENT PROOF. A
@@ -302,7 +302,7 @@ class EraKey:
         # signature attributable to this era. A digest cannot verify anything,
         # so USE is the one test that separates a key from a value shaped like
         # one -- the distinction limb 2 correctly says FORM cannot make.
-        # ⚠: THESE TWO REFUSALS USED TO LIVE AT THE END OF
+        # ⚠ THESE TWO REFUSALS USED TO LIVE AT THE END OF
         # `_require_exercise`, WHICH RUNS ONLY WHEN `legacy_encoding` IS SET — so a
         # NORMAL directory entry was never algorithm-checked and never
         # status-checked. `KeyDirectory` accepted `algorithm: "totally-made-up"`
@@ -310,11 +310,11 @@ class EraKey:
         #
         # `selftest_t2.py` had been reporting exactly this for fifteen packs and
         # nothing read it. **The selftest was right and the code was
-        # wrong**, which is why 's instruction to "re-cut the stale
+        # wrong**, which is why an instruction to "re-cut the stale
         # selftests" was declined for this one: re-cutting it would have deleted
         # the only standing report of a live defect.
         #
-        # 's finding, one file along: *a guard that exists and is not
+        # An earlier finding, one file along: *a guard that exists and is not
         # invoked is indistinguishable from a guard that was never written,
         # except that it reads as protection.*
         if self.algorithm != "ed25519":
@@ -398,7 +398,7 @@ class EraKey:
 class KeyDirectory:
     """A mapping from era identifier to entry (§2).
 
-     RULED by `ERRATA_P3_02`: on a two-copy disagreement the
+    RULED by `ERRATA_P3_02`: on a two-copy disagreement the
     verifier **MUST REFUSE**, per the refusal-over-guessing discipline — *"a
     verifier that picks a copy has chosen which authority to trust."*
     `cross_check` reports; `assert_agrees` refuses. The T-2 behaviour (report,
@@ -428,7 +428,7 @@ class KeyDirectory:
 
         ⚠ Runs at the DIRECTORY level and not on EraKey, because verifying a
         succession needs the PREDECESSOR'S KEY, which one entry does not have.
-        That is why found this missing: the evidence was not merely
+        That is why a measurement found this missing: the evidence was not merely
         unchecked, it had nowhere to live.
         """
         import hashlib
@@ -512,7 +512,7 @@ class KeyDirectory:
         boundary the succession names is the one that was attested -- and NOT
         INDEPENDENCE. It is worth exactly what the trust list is worth, and
         `ERR-CP-001` already rules that an anchored witness run by the operator
-        passes. 's own witness was synthetic and operator-held, so this
+        passes. The earlier witness was synthetic and operator-held, so this
         check would have passed over it and established nothing.
 
         What it DOES establish, and it is not nothing: that the succession and
@@ -644,7 +644,7 @@ class KeyDirectory:
                 "KD-003: the published and in-chain key directories disagree; "
                 "refusing to verify under either — " + "; ".join(findings))
 
-    # ── KD-013 (RATIFIED ) ───────────────────────────────────────────
+    # ── KD-013 (RATIFIED) ───────────────────────────────────────────
     @staticmethod
     def directory_digest(published_bytes: bytes) -> str:
         """`KD-013`'s NAMED construction, and nothing else.

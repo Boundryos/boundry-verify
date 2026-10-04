@@ -1,9 +1,9 @@
 """The chain over a bundle, to a verdict — STOP-C.
 
-Implements, **RATIFIED and amended
-through **block hash
+Implements section 12 of the verification-bundle specification, **RATIFIED and amended**,
+block hash
 `0100c67c103a32897cee587d2f6f7e5b98cad195a94a4247087deb8db92d5e86`, 39411
-bytes — extending **Built from
+bytes — extending section 8 of the checkpoints-and-receipts specification. **Built from
 those documents alone; the kernel repository has not been read.**
 
 > **⚠ The era key comes from the KEY DIRECTORY and never from the bundle**
@@ -39,7 +39,7 @@ re-emission, then reads `head_construction_id`, `era`, `head_hash` and
 different route — and the route that leaves the fields readable (`BV-015`).
 `canonical_read.py` is deleted.
 
-**`D5-e` in full (STOP-C).** recorded STOP-B's result precisely: a forged
+**`D5-e` in full (STOP-C).** A ruling recorded STOP-B's result precisely: a forged
 bundle returned `UNATTESTED` **because `witness_keys` was never read**, which is
 *"the right answer for the wrong reason — correct by omission, and omission is
 not a property."*
@@ -65,13 +65,13 @@ codes. `REFUTED` is reserved for a check that ran and did not pass.
 
 **⚠ `BV-028` is the general form of that, and brings §12
 step 3 to it: an unrecognised `head_construction_id` is now `UNATTESTED`.** *It
-had been `REFUTED` since; / reported the disagreement with
+had been `REFUTED` from the start; a finding reported the disagreement with
 the signature rung instead of harmonising it, and the ruling came back on the
 side of the newer rung.* **⚠ THE ONE PLACE WHERE THE TWO CLAUSES COULD NOT BOTH BE OBEYED IS CLOSED.**
-*/ reported that the token-checker refusal branch returned `REFUTED`
+*A finding reported that the token-checker refusal branch returned `REFUTED`
 for four causes `BV-028` calls `UNATTESTED`, while `BV-020`'s closed reason set
 had no fact to report them under — so there was no conforming code to write, and
-minting one would have been minting the specification.* ** ruled both
+minting one would have been minting the specification.* **A ruling decided both
 sides: `BV-020` gains a fifth fact, and a token checker returning one boolean
 cannot be conformant with `BV-028`.** The witness refusal branch in
 `_witness_rungs` is now a five-way dispatch on a closed result vocabulary, and
@@ -110,8 +110,7 @@ __all__ = ["verify_bundle", "RECOGNISED_PAYLOAD_FORM_TAGS",
            "ENVELOPE_OPTIONAL_KEYS_BY_BUNDLE_VERSION"]
 
 #: `BV-005`: `form_tag` is *"which canonical form produced them"* — and `them`
-#: is `record.canonical_bytes`, *"the payload's canonical bytes under
-#: "*.
+#: is `record.canonical_bytes`, *"the payload's canonical bytes under"* the canonical form.
 #:
 #: ⚠ **SO THIS SET IS THE PAYLOAD'S CANONICAL FORMS, AND IT HELD THE ENVELOPE'S
 #: FOR TWO PACKS**. As shipped it read
@@ -154,7 +153,7 @@ ENVELOPE_KEYS_BY_BUNDLE_VERSION = {1: CEF_KEYS, 2: CEF_V3_KEYS}
 #: ABSENCE, so two keys may be missing and no others.
 ENVELOPE_OPTIONAL_KEYS_BY_BUNDLE_VERSION = {1: frozenset(), 2: CEF_V3_OPTIONAL_KEYS}
 
-# ⚠ **THE ENVELOPE FORM IS IDENTIFIED BY THE BUNDLE VERSION** (b),
+# ⚠ **THE ENVELOPE FORM IS IDENTIFIED BY THE BUNDLE VERSION**,
 # which fixes the key set below (`BV-033`). Nothing reads `form_tag` to identify
 # it: *the envelope is self-describing — a v3 mapping carries
 # `canonical_version` — and the tag names the payload's form.*
@@ -208,10 +207,10 @@ def _verify_named_signature(report: Report, rung: str, holder: dict, message: by
     > RULED. KEPT, NOT DELETED.** Until `resolve_construction`'s
     > outcome at §12 step 3 was **`REFUTED`** on materially identical facts: a
     > named construction this verifier does not hold, and a check that therefore
-    > never ran. **This rung was reported as disagreeing with that one at
-    > / rather than harmonised on sight**, one of the fourteen runs
-    > turned on the choice, and ruled **this** rung right, minted
-    > `BV-028` from it and corrected §12 step 3. *: harmonising it
+    > never ran. **This rung was reported as disagreeing with that one
+    > rather than harmonised on sight**, one of the fourteen runs
+    > turned on the choice, and a ruling found **this** rung right, minted
+    > `BV-028` from it and corrected §12 step 3. *Harmonising it
     > unasked would have produced the same code and destroyed the record that
     > there had been a disagreement.* **Nothing in this function changed.**
     """
@@ -336,7 +335,7 @@ def _envelope_field_faults_v3(envelope: dict) -> list[str]:
 
 
 def _envelope_field_faults_v1(envelope: dict) -> list[str]:
-    """Section 12 step 4: *""* — the
+    """Section 12 step 4 — the
     FIELD RULES, not only `CEF-001`'s key set.
 
     **The key set was checked and the field rules were not.** A `payload_hash`
@@ -425,7 +424,7 @@ def _json_view_finding(body: dict) -> str | None:
     as a finding against the exporter. **It never contributes to a verdict** —
     this returns text, and the text reaches a `detail` field and nothing else.
 
-    > **⚠. `BV-013` permits reporting disagreement, but the JSON
+    > **⚠ `BV-013` permits reporting disagreement, but the JSON
     > view's STRUCTURE is not specified anywhere**, and neither is the mapping
     > from CBOR to JSON — a CBOR byte string has no unambiguous JSON
     > counterpart. **So "disagreement" is only decidable where the values are
@@ -501,7 +500,7 @@ def verify_bundle(bundle: Bundle, *, directory: KeyDirectory,
     different fact from an empty trust list (*anchors nobody*) and produces a
     different reason code.
 
-    *`recognised_form_tags` joined them Until then it fell
+    *`recognised_form_tags` joined them first. Until then it fell
     back to `RECOGNISED_FORM_TAGS`, which is a default wearing a constant's
     clothes.* **`recognised_signature_forms` joins them, by the
     same rule: `BV-004` as extended covers EVERY named profile identifier in a
@@ -587,7 +586,7 @@ def verify_bundle(bundle: Bundle, *, directory: KeyDirectory,
         # incompleteness as `REFUTED` converts a gap in itself into evidence
         # against its subject.*
         #
-        # / reported this rung and `_verify_named_signature`
+        # A finding reported this rung and `_verify_named_signature`
         # disagreeing on materially identical facts and did not harmonise them;
         # The signature rung was ruled right, `BV-028` was minted from it, and
         # brought §12 step 3 to it. **The two rungs now agree, by a ruling
@@ -801,7 +800,7 @@ def _witness_rungs(report: Report, body: dict, statement: CheckpointStatement,
                                  "checker was provisioned for"
                                  + suffix))
         elif result == TOKEN_REFUSED_CHECKER_SHORT:
-            # ⚠ `BV-020`'s FIFTH FACT, / and
+            # ⚠ `BV-020`'s FIFTH FACT, ruled and
             # implemented here. **THIS BRANCH RETURNED `REFUTED` UNTIL
             #
             # The witness IS anchored, a checker for its kind DOES exist, IT
@@ -846,11 +845,11 @@ def _witness_rungs(report: Report, body: dict, statement: CheckpointStatement,
             # *`bundle_chain` cannot narrate the outcome of a checker it has
             # never seen: `BV-019` makes every checker provisioned, so the only
             # party that can say why one refused is the checker.* Corrects the
-            # analysis, which said `witness.py` was the only
+            # earlier analysis, which said `witness.py` was the only
             # file this needed -- true of the success path, and measurably not
             # of this one.
             #
-            # ⚠⚠ ** IS CLOSED HERE.** This branch used to catch every
+            # ⚠⚠ **THE FINDING IS CLOSED HERE.** This branch used to catch every
             # refusal, including the four the checker raises when it is SHORT,
             # and report them all as `REFUTED` in direct violation of `BV-028`.
             # The ruling: `BV-020` gains a fifth fact, and a token checker

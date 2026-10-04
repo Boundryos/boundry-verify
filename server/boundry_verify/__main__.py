@@ -76,7 +76,7 @@ word, never the code.**
                              [--der-max-bytes N] [--der-max-depth N]
                              [--der-max-elements N]
 
-`DIR.json` is 's mapping. `LIST.json` maps
+`DIR.json` is the key-directory specification's mapping. `LIST.json` maps
 `witness_key_ref` to `{witness_kind, certificate_pem | public_key_pem |
 key_material_hex, format}`. **Both travel out of band and neither comes from the
 bundle** (`BV-012`, `BV-010`).
@@ -136,14 +136,14 @@ RFC3161_KIND = "rfc3161"
 #:
 #: ⚠ **THIS IS A CALLER'S DECISION AND NOT A DEFAULT** (`BV-004`, untouched).
 #: `parse` still has no default and still refuses to assume a profile; what
-#: changed is that this caller — which says recognises both, and
+#: changed is that this caller — which recognises both, and
 #: *"the old one is never dropped"* — now says so explicitly. `INTEROP/`'s
 #: version-1 bundles stay verifiable forever, which is the point of the rule.
 #:
 #: ⚠ **DERIVED FROM THE TWO GOVERNED DECLARATIONS**, so a third version added to
 #: `RECOGNISED_BUNDLE_VERSIONS` arrives here without anyone editing this file,
 #: and a version REMOVED from it disappears here too. A second literal list
-#: would be the drift forbids.
+#: would be the forbidden drift.
 PROVISIONED_ENCODING_IDS = frozenset(
     _bundle.ENCODING_ID_BY_BUNDLE_VERSION[version]
     for version in _bundle.RECOGNISED_BUNDLE_VERSIONS)

@@ -1,6 +1,6 @@
 """The read-only artefact source — the MINIMAL non-production instance.
 
-⚠ ** asked what the minimal non-production instance is. The
+⚠ **The question was what the minimal non-production instance is. The
 answer this build reached is: NOT AN INSTANCE.**
 
 Every runtime SQLite attachment in canon is `aiosqlite.connect(path)` or
@@ -39,7 +39,7 @@ import sys
 from dataclasses import dataclass
 from typing import Any, Iterator
 
-# ⚠ `K-3` and: the label convention is IMPORTED from the one place that
+# ⚠ `K-3`: the label convention is IMPORTED from the one place that
 # declares it, never restated here — and it is a SIBLING, so the shipped folder
 # still runs on stdlib alone.
 from .client_label import LabelRefused as _ClientLabelRefused    # noqa: E402
@@ -49,12 +49,12 @@ __all__ = ["Record", "Corpus", "CorpusRefused", "ROOTS_ENV",
            "allowed_roots", "declared_roots", "label_of", "resolve_root",
            "DEMO_LABEL", "KIT_LABEL", "CORPUS_DIR_WORDING"]
 
-#: ⚠ **THE REACH BOUND —.**
+#: ⚠ **THE REACH BOUND.**
 #:
 #: `SPEC…v0.2` §1's conversation-side rule — *everything rendered is governed as
 #: if it may leave the machine, because it does* — is complete about the
 #: RENDERING and silent about the REACH. **`corpus_dir` was unbounded, and it is
-#: chosen by the MODEL, not by the operator**, the
+#: chosen by the MODEL, not by the operator**; when this was measured, the
 #: connector read a file outside its own corpus and rendered its body into the
 #: answer. A rule about how to treat what comes out does not bound what goes in.
 #:
@@ -157,7 +157,7 @@ def allowed_roots() -> list[pathlib.Path]:
     **Unset means the two packaged synthetic roots — the demonstration corpus
     and the evaluation kit's evidence — and nothing else**.
     The safe default is the narrow one, which is the opposite of the default
-     found in the auth stub.
+    found in the auth stub.
     """
     return [path for _, path in declared_roots()]
 
@@ -198,7 +198,7 @@ def label_of(target: str | pathlib.Path) -> str | None:
     """The declared label of the root containing `target`. **EXP-006's whole
     point: a tool renders this, never the path.**
 
-    ⚠: it goes through `resolve_root` first, because two tools call this with the RAW
+    ⚠ It goes through `resolve_root` first, because two tools call this with the RAW
     `corpus_dir` argument. Without that, asking for `kit` by name answered `(unlabelled root)` —
     the tool would have resolved the label to read the records and then failed to name the root
     it had just read."""
@@ -314,12 +314,12 @@ class Corpus:
     """
 
     def __init__(self, root: str | pathlib.Path) -> None:
-        # ⚠: ONE construction point, so a label is usable everywhere a path is — the seven
+        # ⚠ ONE construction point, so a label is usable everywhere a path is — the seven
         # tools, the kit's readers, and anything added later — without a second resolution rule.
         self.root = resolve_root(root)
 
     def _check_client(self) -> None:
-        """⚠ THE WRONG-CLIENT-ROOT REFUSAL —, and it is a
+        """⚠ THE WRONG-CLIENT-ROOT REFUSAL, and it is a
         comparison of two DECLARATIONS, never a cryptographic binding.
 
         If the root carries a label AND a landed export left a manifest naming a
@@ -341,24 +341,24 @@ class Corpus:
         try:
             declared = str(self._read_json(manifest).get("client_label", "")).strip()
         except CorpusRefused as _exc:
-            # ⚠: only a manifest that is not JSON is passed over, as
+            # ⚠ Only a manifest that is not JSON is passed over, as
             # before. A manifest that is a LINK OUT OF THE ROOT is an attack on
-            # the one comparison this method makes ( `DEVB-2`), and
+            # the one comparison this method makes (`DEVB-2`), and
             # swallowing it would serve the records with the check skipped.
             if _exc.code != "corpus-record-unreadable":
                 raise
             return
-        # ⚠: a declaration that is not a well-formed label is
+        # ⚠ A declaration that is not a well-formed label is
         # refused BEFORE it is compared. Comparing two malformed strings and
         # finding them equal would pass a name straight through the check that
-        # exists to keep names out. 's rule stands unchanged — the
+        # exists to keep names out. The reach-bound rule stands unchanged — the
         # connector renders labels and never paths.
         for _l in (x for x in (declared, label) if x):
             try:
                 _validate_client_label(_l)
             except _ClientLabelRefused as _exc:
-                # ⚠: this RENDERED the malformed string in the sentence
-                # that says it will not render it ( attack `DEVB-11`).
+                # ⚠ This RENDERED the malformed string in the sentence
+                # that says it will not render it (attack `DEVB-11`).
                 _which = ("the export's client_label" if _l == declared
                           else "this root's declared label")
                 raise CorpusRefused(
@@ -400,14 +400,14 @@ class Corpus:
                 else "this root (it carries no label, so none is shown)")
 
     def _confined_bytes(self, path: pathlib.Path) -> bytes:
-        """⚠⚠ ** — THE ONE PLACE THIS CONNECTOR OPENS A
+        """⚠⚠ **THE ONE PLACE THIS CONNECTOR OPENS A
         FILE, AND EVERY BYTE IT READS COMES FROM INSIDE A DECLARED ROOT.**
 
         The root was checked; the ENTRIES in it were not. `glob("*.json")` and
         `root / "key_directory.json"` both follow a link, so a link placed in a
         declared folder made the connector read any file the user can read —
-         An adversarial pass served an envelope from outside the root and opened `/etc/passwd`,
-        and 's own attacks took VERIFICATION KEYS from outside it
+        an adversarial pass served an envelope from outside the root and opened `/etc/passwd`,
+        and its own attacks took VERIFICATION KEYS from outside it
         (`DEVB-1`) and a forged client label (`DEVB-2`).
 
         **The rule, declared:** an entry is read only if its FINAL target —
@@ -426,7 +426,7 @@ class Corpus:
         ⚠⚠ **A HARD LINK IS INVISIBLE TO `realpath`, SO IT HAS A RULE OF ITS OWN.**
         A hard link is a second NAME, inside the root, for a file whose other name
         may be anywhere on the same filesystem; there is no link to follow.
-         attack `DEVB-9` measured it: `realpath` containment alone SERVED a
+        Attack `DEVB-9` measured it: `realpath` containment alone SERVED a
         file whose other name was outside the root (same inode), before this fix
         and after the `realpath` half of it. So a regular file with MORE THAN ONE
         NAME (`st_nlink > 1`) is REFUSED, `corpus-entry-hard-linked`: nothing can
@@ -539,7 +539,7 @@ class Corpus:
 
     #: ⚠ The JSON files a root may hold that are not records, named ONE BY ONE: provisioning
     #: (`key_directory.json`), an export's own declaration (`EXPORT_MANIFEST.json`), and the
-    #: kit's E5 result (`CONDUCT_LINE_RESULT.json`, ). Each has its own reader.
+    #: kit's E5 result (`CONDUCT_LINE_RESULT.json`). Each has its own reader.
     NAMED_FILES = ("key_directory.json", "EXPORT_MANIFEST.json", "CONDUCT_LINE_RESULT.json")
 
     def _classified(self) -> list[tuple[pathlib.Path, dict[str, Any]]]:

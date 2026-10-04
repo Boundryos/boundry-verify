@@ -59,8 +59,8 @@ _B = CURVE_P256["b"]
 _N = CURVE_P256["n"]
 _G = (CURVE_P256["Gx"], CURVE_P256["Gy"])
 
-#: The digest this curve is paired with. ⚠ Cited as RFC 5758 §3.2 until
-#: §A.6: that section covers ECDSA OIDs in certificates and CRLs.
+#: The digest this curve is paired with. ⚠ Cited as RFC 5758 §3.2 until a
+#: correction: that section covers ECDSA OIDs in certificates and CRLs.
 #: The CMS pairing rule is RFC 5753 §2.1.1.
 DIGEST_OCTETS = 32
 
